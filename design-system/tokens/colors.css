@@ -1,0 +1,15 @@
+:root {
+    --color-primary: #331D0F;    /* Main dark theme color (Brown) */
+    --color-dark: var(--color-primary);
+    --color-accent: #DD5C00;     /* CTA buttons, icons, highlights (Orange) */
+    --color-bg: #FFFFFF;         /* Global background (White) */
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-gray: #888888;       /* Secondary text, captions */
+    --color-light-gray: #F5F5F5; /* Background for cards/inputs */
+    
+    /* Semantic Colors */
+    --color-text-main: var(--color-dark);
+    --color-text-muted: var(--color-gray);
+    --color-border: #ccc;
+}

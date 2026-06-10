@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist | SOLE - Bespoke Wooden Furniture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { 
+            background-color: var(--color-bg); 
+            padding-top: 176px;
+        }
+        
+        .wishlist-container { 
+            max-width: 1440px; 
+            margin: 0 auto; 
+            padding: 0 104px 104px; 
+        }
+
+        .wishlist-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 296px); 
+            gap: 16px; 
+            justify-content: start;
+        }
+
+        /* Adjustments for product-card to match grid without overriding design */
+        .product-card-link {
+            width: 296px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .product-card.card-small {
+            width: 296px;
+        }
+
+        .h-small {
+            height: 296px;
+        }
+
+        /* White background and refined image sizes for specific cards */
+        .bg-white {
+            background-color: var(--color-white) !important;
+        }
+
+        .img-medium img {
+            width: 85% !important;
+            height: 85% !important;
+            object-fit: contain !important;
+            margin: auto;
+            position: absolute;
+            inset: 0;
+        }
+
+        .img-tiny img {
+            width: 60% !important;
+            height: 60% !important;
+            object-fit: contain !important;
+            margin: auto;
+            position: absolute;
+            inset: 0;
+        }
+
+        /* Custom hover text */
+        .card-config::after {
+            content: 'See configuration' !important;
+        }
+
+        .card-cta::after {
+            content: 'See more products' !important;
+        }
+
+        @media (max-width: 1024px) {
+            .wishlist-container { padding: 0 40px 60px; }
+            .wishlist-grid { grid-template-columns: repeat(3, 1fr); width: 100%; }
+            .product-card-link, .product-card.card-small { width: 100%; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+        }
+    </style>
+</head>
+<body>
+                        <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+
+    <main class="wishlist-container" id="wishlist">
+        <h1 class="glendale-title" style="font-family: var(--font-heading); font-size: 45px; margin-bottom: 56px; letter-spacing: 1px;">WiSHLIst</h1>
+        <div id="wishlist-container" class="wishlist-grid">
+            <!-- Saved closet configuration -->
+            <div class="wishlist-item">
+                <a href="closet-configurator.html" class="product-card-link">
+                    <article class="product-card card-small card-config">
+                        <div class="product-image-area h-small bg-white img-medium">
+                            <img src="reference/For hero frame animation/Closet.png" alt="Saved closet configuration">
+                            <button class="gallery-like like-btn liked" aria-label="Add to wishlist"><i class="ph-fill ph-heart"></i></button>
+                            <button class="delete-btn" aria-label="Delete from wishlist"><i class="ph ph-trash"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Saved closet configuration</h3>
+                            <span class="product-dims" style="visibility: hidden;">W 0 D 0 H 0 cm</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+
+            <!-- Gallery piece converted to catalogue structure -->
+            <div class="wishlist-item">
+                <a href="Product page.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/gallery_photos/296x296.png" alt="Furniture piece 1">
+                            <button class="gallery-like like-btn liked" aria-label="Add to wishlist"><i class="ph-fill ph-heart"></i></button>
+                            <button class="delete-btn" aria-label="Delete from wishlist"><i class="ph ph-trash"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Bespoke furniture piece</h3>
+                            <span class="product-dims">Custom order</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+
+            <!-- One card from closet catalogue (small type) -->
+            <div class="wishlist-item">
+                <a href="Product page.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="reference/Catalogue photo/Closets/296x296(8).png" alt="Cabinet">
+                            <button class="gallery-like like-btn liked" aria-label="Add to wishlist"><i class="ph-fill ph-heart"></i></button>
+                            <button class="delete-btn" aria-label="Delete from wishlist"><i class="ph ph-trash"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Spacious light closet</h3>
+                            <span class="product-dims">W 180 D 45 H 210 cm</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+
+            <!-- Add product to your wishlist (CTA card) -->
+            <div class="cta-card">
+                <a href="closet.html" class="product-card-link">
+                    <article class="product-card card-small card-cta">
+                        <div class="product-image-area h-small bg-white img-tiny">
+                            <img src="reference/Service section icons/Icon bespoken furniture.png" alt="Add product">
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Add product to your wishlist!</h3>
+                            <span class="product-dims" style="visibility: hidden;">W 0 D 0 H 0 cm</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Wood Carver | SOLE - Bespoke Wooden Furniture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: var(--color-bg);
+            padding-top: 100px;
+        }
+
+        .vacancy-detail-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 104px 104px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 40px;
+        }
+
+        .back-link {
+            grid-column: span 12;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--color-dark);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 52px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .vacancy-content {
+            grid-column: span 7;
+            max-width: 504px;
+        }
+
+        .vacancy-sidebar {
+            grid-column: span 5;
+            position: sticky;
+            top: 140px;
+            align-self: start;
+        }
+
+        .detail-title {
+            font-family: 'Glendale', sans-serif;
+            font-size: 45px;
+            font-weight: 400;
+            text-transform: none;
+            color: #000;
+            margin-bottom: 16px;
+            line-height: 0.9;
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: 0.5px;
+        }
+        
+        .meta-value {
+            width: 128px;
+            height: 36px;
+            background-image: url('assets/Small buttons frame (orange).png');
+            background-size: 128px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .detail-section {
+            margin-bottom: 48px;
+        }
+
+        .detail-section h2 {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .detail-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-section li {
+            position: relative;
+            padding-left: 24px;
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .detail-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        .apply-card {
+            background-color: var(--color-dark);
+            color: var(--color-white);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .apply-card h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .apply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .input-wrapper { position: relative; margin-bottom: 5px; }
+        .input-star {
+            position: absolute; top: 12px; right: 10px; font-size: 14px; color: var(--color-accent);
+        }
+
+        .apply-form input {
+            width: 410px; 
+            padding: 0 15px;
+            height: 48px;
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            font-family: var(--font-main); 
+            font-size: 14px; 
+            background-color: var(--color-white); 
+            color: var(--color-dark);
+        }
+        .apply-form textarea {
+            width: 100%; 
+            padding: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            font-family: var(--font-main); 
+            font-size: 14px; 
+            background-color: var(--color-white); 
+            color: var(--color-dark);
+            resize: none;
+        }
+
+        .apply-btn {
+            width: 192px;
+            height: 48px;
+            margin-top: 10px;
+            background-image: url('assets/frame w192.png');
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .apply-btn:hover {
+            background-image: url('assets/frame w192.png');
+            background-size: cover;
+        }
+
+        @media (max-width: 1024px) {
+            .vacancy-detail-container { padding: 0 50px 80px; }
+            .vacancy-content, .vacancy-sidebar { grid-column: span 12; }
+            .vacancy-sidebar { position: static; }
+            .back-link { margin-bottom: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .vacancy-detail-container { padding: 0 24px 60px; }
+            .detail-title { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+                        <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+ <main class="vacancy-detail-container">
+        <a href="vacancies.html" class="back-link">
+            <i class="ph ph-arrow-left"></i>
+            <span>Back to all vacancies</span>
+        </a>
+
+        <div class="vacancy-content">
+            <h1 class="detail-title" style="font-family: 'Glendale', sans-serif; font-size: 45px; color: #000;">SaLEs<br>AgEnT</h1>
+            <div class="detail-meta">
+                <span class="meta-value">Full-time</span>
+                <span class="meta-value">Workshop</span>
+                <span class="meta-value">Israel</span>
+            </div>
+
+            <section class="detail-section">
+                <h2>About the Role</h2>
+                <p>As a Master Wood Carver at SOLE, you will be the guardian of our traditional craftsmanship. You will bring life to our bespoke furniture pieces through intricate hand-carved details, bridging historical patterns with contemporary silhouettes.</p>
+                <p>We are looking for someone with a deep understanding of wood textures and a passion for preserving the art of manual carving in a modern workshop environment.</p>
+            </section>
+
+            <section class="detail-section">
+                <h2>Responsibilities</h2>
+                <ul>
+                    <li>Execute complex wood carving patterns on custom furniture pieces.</li>
+                    <li>Collaborate with designers to translate concepts into physical textures.</li>
+                    <li>Select and prepare wood materials for specific carving techniques.</li>
+                    <li>Maintain carving tools and workshop equipment to the highest standards.</li>
+                    <li>Mentor apprentice carvers and share traditional knowledge.</li>
+                </ul>
+            </section>
+
+            <section class="detail-section">
+                <h2>Requirements</h2>
+                <ul>
+                    <li>At least 10 years of experience in manual wood carving.</li>
+                    <li>Deep knowledge of different wood species and their carving properties.</li>
+                    <li>Ability to interpret technical drawings and designer sketches.</li>
+                    <li>Exceptional attention to detail and artistic vision.</li>
+                    <li>Strong portfolio of previous carving work.</li>
+                </ul>
+            </section>
+        </div>
+
+        <aside class="vacancy-sidebar">
+            <div class="apply-card">
+                <h3>Apply for this position</h3>
+                <form class="apply-form">
+                    <div class="input-wrapper">
+                        <span class="input-star">*</span>
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <span class="input-star">*</span>
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <span class="input-star">*</span>
+                        <input type="tel" placeholder="Phone Number">
+                    </div>
+                    <textarea placeholder="Tell us about your experience" rows="4"></textarea>
+                    <button type="submit" class="btn btn-primary apply-btn">Send Application</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

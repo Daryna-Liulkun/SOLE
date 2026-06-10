@@ -1,0 +1,25 @@
+.nav-link {
+    font-family: var(--font-main);
+    font-size: var(--font-size-md);
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--color-white); /* White for brown header */
+    transition: all 0.3s ease;
+    padding: 0 var(--space-sm);
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
+.nav-link-footer {
+    color: var(--color-white);
+    padding: 0;
+    opacity: 0.8;
+}
+
+.nav-link-footer:hover {
+    opacity: 1;
+    color: var(--color-accent);
+}

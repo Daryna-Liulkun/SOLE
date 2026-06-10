@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | SOLE - Bespoke Wooden Furniture</title>
+    <meta name="description" content="Explore our gallery of bespoke wooden furniture. Each piece is crafted to your vision with precision and care.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: var(--color-bg);
+            padding-top: 176px;
+        }
+
+        /* === Gallery Container === */
+        .gallery-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 104px 80px;
+        }
+
+        /* === Intro === */
+        .gallery-intro {
+            margin-bottom: 56px;
+            max-width: 520px;
+        }
+
+        .gallery-intro h1 {
+            font-size: 45px;
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+            color: var(--color-dark);
+        }
+
+        .gallery-intro p {
+            font-size: 16px;
+            line-height: 1.55;
+            color: var(--color-dark);
+            opacity: 0.85;
+        }
+
+        /* === Masonry Grid === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 296px;
+            gap: 20px;
+        }
+
+        /* === Card === */
+        .gallery-card {
+            position: relative;
+            border-radius: 11px;
+            overflow: hidden;
+            background-color: #d4d4d4;
+            cursor: pointer;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-card:hover, .gallery-card.show-overlay {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(221, 92, 0, 0.25);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        /* Full card link */
+        .gallery-card-link {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+        }
+
+        /* Hover Frame Effect */
+        .gallery-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .gallery-card:hover::before, .gallery-card.show-overlay::before {
+            opacity: 1;
+        }
+
+        .gallery-card--short::before {
+            background-image: url('assets/Gallery hover 296x296 (orange).png');
+        }
+
+        .gallery-card--tall::before {
+            background-image: url('assets/Gallery hover 608x608(orange).png');
+        }
+
+        /* --- Span modifiers --- */
+        .gallery-card--short {
+            grid-row: span 1;
+        }
+
+        .gallery-card--tall {
+            grid-row: span 2;
+        }
+
+/* === Gradient overlay on cards for contrast === */
+.gallery-card::after {
+    content: 'see the product';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(221, 92, 0, 0.5); /* #DD5C00 with 50% opacity */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 4;
+    border-radius: 11px;
+    pointer-events: none;
+}
+
+.gallery-card:hover::after, .gallery-card.show-overlay::after {
+    opacity: 1;
+}
+
+/* Footer */
+        /* === Footer override: contact row for this page === */
+        .footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .footer-contact-row {
+            display: flex;
+            gap: 50px;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 1024px) {
+            .gallery-container {
+                padding: 0 50px 50px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-auto-rows: 296px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 120px; }
+            .gallery-container {
+                padding: 0 24px 60px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: calc((100vw - 48px - 12px) / 2); /* Square-like calculation */
+                gap: 12px;
+            }
+            .gallery-intro { margin-bottom: 30px; }
+            .gallery-intro h1 {
+                font-size: 32px !important;
+                white-space: normal !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding-top: 120px; }
+            .gallery-container {
+                padding: 0 24px 40px;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: calc((100vw - 48px - 10px) / 2); /* Square-like for small mobile */
+                gap: 10px;
+            }
+            .gallery-card--tall {
+                grid-row: span 2; 
+            }
+            .gallery-intro h1 {
+                font-size: 28px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+ <main class="gallery-container">
+        <!-- Intro -->
+        <section class="gallery-intro">
+            <h1 style="font-family: var(--font-heading); letter-spacing: 1px;">gALLERY oF wORKs</h1>
+        </section>
+
+        <!-- Masonry Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+
+            <!-- Card 1: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-1">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296.png" alt="Furniture piece 1">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 2: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-2">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(2).png" alt="Furniture piece 2">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 3: tall -->
+            <article class="gallery-card gallery-card--tall" id="gallery-card-3">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/608x608(1).png" alt="Furniture piece 3">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 4: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-4">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(3).png" alt="Furniture piece 4">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 5: tall -->
+            <article class="gallery-card gallery-card--tall" id="gallery-card-5">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/608x608(2).png" alt="Furniture piece 5">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 6: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-6">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(4).png" alt="Furniture piece 6">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 7: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-7">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(5).png" alt="Furniture piece 7">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 8: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-8">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(6).png" alt="Furniture piece 8">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 9: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-9">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(7).png" alt="Furniture piece 9">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+            <!-- Card 10: short -->
+            <article class="gallery-card gallery-card--short" id="gallery-card-10">
+                <a href="Product page.html" class="gallery-card-link"></a>
+                <img src="assets/gallery_photos/296x296(8).png" alt="Furniture piece 10">
+                <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

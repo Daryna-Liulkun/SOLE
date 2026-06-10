@@ -1,0 +1,10 @@
+:root {
+    --font-size-xl: 45px;   /* Section Titles */
+    --font-size-lg: 24px;   /* Card Titles */
+    --font-size-md: 16px;   /* Body / Nav */
+    --font-size-sm: 14px;   /* Small text */
+    --font-size-xs: 12px;   /* Captions */
+    
+    --line-height-base: 1.6;
+    --line-height-tight: 1.2;
+}

@@ -1,0 +1,18 @@
+.logo {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--color-white); /* White because header is brown */
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--color-accent);
+}
+
+.logo-white {
+    color: var(--color-white);
+}

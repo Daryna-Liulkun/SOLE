@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLE - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css?v=4">
+    <style>
+        #about-view { padding-top: 0; }
+        .about-hero { margin-bottom: 80px; }
+
+        /* Custom About Styles */
+        .glendale-title {
+            font-family: var(--font-heading);
+            font-size: 45px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: none;
+            margin-bottom: 56px;
+            margin-top: 10px;
+            line-height: 0.9;
+        }
+
+        .text-columns {
+            columns: 2;
+            column-gap: 60px;
+            font-size: 22px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .about-join-banner {
+            background-color: var(--color-accent);
+            padding: 75px 0;
+            width: 100%;
+            color: var(--color-white);
+            display: flex;
+            align-items: flex-start;
+            border-radius: 10px;
+        }
+
+        .about-join-content-wrapper {
+            width: 1232px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        
+        .about-join-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: flex-start;
+        }
+
+        .about-media--wide {
+            height: 350px; /* Increased from 250px */
+            overflow: hidden;
+            align-self: flex-start;
+        }
+        
+        .about-media--wide img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            display: block; /* Remove baseline gaps */
+        }
+    </style>
+</head>
+<body>
+        <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+
+    <main id="about-view">
+        <section class="about-page-hero">
+            <img src="assets/about/about photo.png" alt="About Sole">
+        </section>
+
+        <section class="about-section about-hero">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                    <div style="width: 100%; max-width: 504px;">
+                        <h2 class="glendale-title" style="margin-bottom: 20px;">AbOUt</h2>
+                        <p style="font-size: 16px; line-height: 1.6;">There is a special magic in giving an ancient craft a modern voice. This piece bridges the gap where traditional wood carving meets contemporary design. Inspired by cultural heritage and executed with modern precision, it brings warmth, history, and raw character to your home. We truly believe in fusing old-world devotion with new-age aesthetics. For us, timber isn’t just a material — it’s a storyteller waiting to share its history with your space.</p>
+                    </div>
+                    <div class="contacts-details-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 65px;">
+                        <!-- Row 1: Email / Address -->
+                        <div class="contact-detail-item">
+                            <small style="opacity: 0.5; font-size: 12px; margin-bottom: 8px; display: block;">Email</small>
+                            <a href="mailto:Romanenko@gmail.com" style="font-size: 20px; display: block;">Romanenko@gmail.com</a>
+                        </div>
+                        <div class="contact-detail-item">
+                            <small style="opacity: 0.5; font-size: 12px; margin-bottom: 8px; display: block;">Address</small>
+                            <span style="font-size: 20px; display: block;">Oreon, Israel</span>
+                        </div>
+                        <!-- Row 2: Phone / Socials -->
+                        <div class="contact-detail-item">
+                            <small style="opacity: 0.5; font-size: 12px; margin-bottom: 8px; display: block;">Phone</small>
+                            <a href="tel:0960887707" style="font-size: 20px; display: block;">0960887707</a>
+                        </div>
+                        <div class="contacts-socials" style="display: flex; gap: 15px; align-self: flex-start; padding-bottom: 4px;">
+                            <a href="#" style="font-size: 32px;"><i class="ph-fill ph-telegram-logo"></i></a>
+                            <a href="#" style="font-size: 32px;"><i class="ph-fill ph-facebook-logo"></i></a>
+                            <a href="#" style="font-size: 32px;"><i class="ph-fill ph-instagram-logo"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Services Section -->
+        <section class="about-section about-services" style="margin-bottom: 144px;">
+            <div class="container">
+                
+                <!-- Bespoke Furniture Service -->
+                <div class="service-item" style="display: flex; align-items: center; gap: 120px; margin-bottom: 64px; flex-wrap: wrap;">
+                    <div class="service-image" style="width: 100%; max-width: 504px; height: auto; flex-shrink: 0;">
+                        <img src="assets/about/Bespoken 504x362.png" alt="Bespoke furniture" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <div class="service-text" style="width: 100%; max-width: 504px;">
+                        <h3 class="glendale-title" style="margin-bottom: 20px; font-size: 45px;">bESPoKEN FuRNiTURe</h3>
+                        <p style="font-size: 16px; line-height: 1.6;">Custom Sketching: We transform your ideas into precise digital concepts tailored to your lifestyle.<br><br>Master Craftsmanship: Artisans carefully handcraft each piece, combining traditional joinery with modern precision.<br><br>Workshop Updates: We share photo or video updates during production so you can feel connected to the process.</p>
+                    </div>
+                </div>
+
+                <!-- Material Selection Service -->
+                <div class="service-item" style="display: flex; align-items: center; gap: 120px; margin-bottom: 64px; flex-wrap: wrap;">
+                    <div class="service-image" style="width: 100%; max-width: 504px; height: auto; flex-shrink: 0;">
+                        <img src="assets/about/Material 504x362.png" alt="Material Selection" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <div class="service-text" style="width: 100%; max-width: 504px;">
+                        <h3 class="glendale-title" style="margin-bottom: 20px; font-size: 45px;">mATErIAL sELeCTIoN</h3>
+                        <p style="font-size: 16px; line-height: 1.6;">Texture Matching: We analyze your interior’s lighting to recommend the perfect materials, textures, and shades.<br><br>Tactile Samples: You can explore physical samples and view real finishes before making your final choice.<br><br>Durability Check: We select the optimal material hardness and protective coatings based on your daily usage.</p>
+                    </div>
+                </div>
+
+                <!-- On-Site Measurements Service -->
+                <div class="service-item" style="display: flex; align-items: center; gap: 120px; margin-bottom: 64px; flex-wrap: wrap;">
+                    <div class="service-image" style="width: 100%; max-width: 504px; height: auto; flex-shrink: 0;">
+                        <img src="assets/about/On-site 504x360.png" alt="On-Site Measurements" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <div class="service-text" style="width: 100%; max-width: 504px;">
+                        <h3 class="glendale-title" style="margin-bottom: 20px; font-size: 45px;">oN-SItE MEAsUREMeNTs</h3>
+                        <p style="font-size: 16px; line-height: 1.6;">Millimeter Precision: Our team takes ultra-accurate measurements to eliminate any margin of error.<br><br>Technical Inspection: We check floor levels, wall structures, and hidden elements like wiring or baseboards.<br><br>Ergonomic Flow: We map out the space to ensure the future piece leaves plenty of room for comfortable movement.</p>
+                    </div>
+                </div>
+
+                <!-- Layout Design Service -->
+                <div class="service-item" style="display: flex; align-items: center; gap: 120px; margin-bottom: 64px; flex-wrap: wrap;">
+                    <div class="service-image" style="width: 100%; max-width: 504px; height: auto; flex-shrink: 0;">
+                        <img src="assets/about/Layout design 504x360.png" alt="Layout Design" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <div class="service-text" style="width: 100%; max-width: 504px;">
+                        <h3 class="glendale-title" style="margin-bottom: 20px; font-size: 45px;">lAYOuT dESiGN</h3>
+                        <p style="font-size: 16px; line-height: 1.6;">Visualization: We create realistic models so you can see the true scale of the furniture in your room.<br><br>Clearance Mapping: Using 2D blueprints, we ensure all doors, drawers, and walkways function effortlessly.<br><br>Texture Testing: We apply your chosen materials to the model to see how they interact with your room's light.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container" style="padding: 0; margin: 0; max-width: 100%;">
+                <div class="about-join-banner">
+                    <div class="about-join-content-wrapper">
+                        <div class="about-join-grid">
+                            <div class="about-media about-media--wide" aria-hidden="true">
+                                <img src="assets/intro_1.png" alt="Join our team" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="about-join-text">
+                                <h2 class="glendale-title" style="margin-bottom: 26px;">jOIN OuR TeAM</h2>
+                                <p style="font-size: 20px;">We are looking for passionate makers who value quality and attention to detail. If you love working with wood and creating objects that last for generations, we'd love to meet you.</p>
+                                <a class="btn btn-primary join-team-btn" href="vacancies.html" style="margin-top: 30px;">Apply for job</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<style>
+.join-team-btn {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--color-white) !important;
+    background-image: url('assets/Button  hover white.png') !important;
+    background-size: 192px 48px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease;
+}
+
+.join-team-btn:hover {
+    background-color: var(--color-white) !important;
+    border: none !important;
+    color: var(--color-dark) !important;
+    background-image: none !important;
+}
+</style>
+
+
+        <!-- Contact Section -->
+        <section class="contact-section contact-section--about" id="contacts">
+            <div class="container grid-12">
+                <div class="contact-wrapper">
+                    <div class="contact-overlay" id="contactOverlay" style="display: none;">
+                        <div class="contact-overlay-content">
+                            <h3>Thank you for reaching out!<br>We’ll be in contact with you soon.</h3>
+                        </div>
+                    </div>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <h2 class="section-title">Tell us what you're looking for!</h2>
+                            <p class="contact-desc">Tell us about the piece you imagine. We'll help you select the right wood and bring the texture to life.</p>
+                            <div class="contact-details">
+                                <div class="detail-item">
+                                    <small>Email</small>
+                                    <span>Romanenko@gmail.com</span>
+                                </div>
+                                <div class="detail-item">
+                                    <small>Phone</small>
+                                    <span>0960887707</span>
+                                </div>
+                                <div class="detail-item">
+                                    <small>Address</small>
+                                    <span>Oreon, Israel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form-wrapper">
+                            <form class="contact-form" id="contactForm">
+                                <div class="form-row">
+                                    <div class="field field--required">
+                                        <input type="text" placeholder="Name" required>
+                                    </div>
+                                    <div class="field field--required">
+                                        <input type="email" placeholder="Email" required>
+                                    </div>
+                                </div>
+                                <div class="field field--required select-wrapper">
+                                    <select required>
+                                        <option value="" disabled selected>What furniture are you looking for?</option>
+                                        <option value="tables">Tables</option>
+                                        <option value="cabinets">Closet</option>
+                                        <option value="beds">Beds</option>
+                                        <option value="pet_houses">Pet houses</option>
+                                        <option value="ottomans">Ottomans</option>
+                                        <option value="dresser">Dresser</option>
+                                    </select>
+                                </div>
+                                <div class="field field--required">
+                                    <input type="text" placeholder="Preferred size and material?" required>
+                                </div>
+                                <div class="textarea-wrapper">
+                                    <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400"></textarea>
+                                    <div class="textarea-counter" data-for="contactForm">0/400</div>
+                                </div>
+                                <div class="form-submit">
+                                    <button type="submit" class="btn btn-primary">Send the form</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

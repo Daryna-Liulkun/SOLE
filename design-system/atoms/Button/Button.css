@@ -1,0 +1,48 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-family: var(--font-main);
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+}
+
+/* Primary - Brown */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    box-shadow: var(--shadow-orange);
+}
+
+/* Secondary - Orange */
+.btn-secondary {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+.btn-secondary:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--shadow-orange);
+}
+
+/* Outline/Ghost */
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}

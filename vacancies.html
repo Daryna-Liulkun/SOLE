@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacancies | SOLE - Bespoke Wooden Furniture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: var(--color-bg);
+            padding-top: 176px;
+        }
+
+        .vacancies-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 104px 104px;
+        }
+
+        .vacancies-header {
+            margin-bottom: 56px;
+        }
+
+        .vacancies-title {
+            font-family: var(--font-heading);
+            font-size: 45px;
+            font-weight: 400;
+            text-transform: none;
+            color: var(--color-dark);
+            margin-bottom: 20px;
+            line-height: 0.95;
+        }
+
+        .vacancies-subtitle {
+            font-size: 18px;
+            max-width: 600px;
+            opacity: 0.8;
+        }
+
+        .vacancies-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 296px);
+            gap: 16px;
+            justify-content: start;
+        }
+
+        .vacancy-card {
+            width: 296px;
+            height: 296px;
+            background-color: var(--color-white);
+            border-radius: 8px;
+            padding: 40px 16px 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .vacancy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px rgba(221, 92, 0, 0.25);
+        }
+
+        .vacancy-card-title {
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 0;
+            color: #000;
+        }
+
+        .vacancy-card-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            margin-bottom: 0;
+            color: #000;
+            opacity: 0.8;
+        }
+
+        .vacancy-card-desc {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+            color: #000;
+            opacity: 0.7;
+            margin-top: 8px; /* 8px flex gap + 8px margin = 16px */
+        }
+
+        .vacancy-card-btn {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 2;
+            min-width: 130px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            border-radius: 10px;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            font-family: var(--font-main);
+            font-size: 16px;
+            font-weight: 400;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .vacancy-card-btn:hover {
+            background-color: var(--color-white);
+            color: var(--color-dark);
+            background-image: url('reference/Configurator/ux/Small buttons frame (orange).png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        @media (max-width: 1024px) {
+            .vacancies-container { padding: 0 50px 80px; }
+            .vacancies-grid { grid-template-columns: repeat(2, 296px); justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .vacancies-container { padding: 0 24px 60px; padding-top: 120px; }
+            .vacancies-title { font-size: 36px; text-align: left; }
+            .vacancies-grid { grid-template-columns: 1fr; }
+            .vacancy-card { width: 100%; height: auto; min-height: 296px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding-top: 120px; }
+            .vacancies-container { padding: 0 24px 40px; }
+            .vacancies-title { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+            <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+ <main class="vacancies-container">
+        <header class="vacancies-header">
+            <h1 class="vacancies-title">JoBS OpPORTUNiTIEs</h1>
+        </header>
+
+        <div class="vacancies-grid">
+            <!-- Card 1 -->
+            <article class="vacancy-card">
+                <h3 class="vacancy-card-title">Carpenter</h3>
+                <p class="vacancy-card-subtitle">Salary: 1500$</p>
+                <p class="vacancy-card-desc">Full-time. Work experience from 2 years. Work schedule is five days from 9:00 a.m. to 6:00 p.m. Weekends and overwork are paid separately by the hour. Possible business trips.</p>
+                <a href="vacancy-master-carver.html" class="vacancy-card-btn">Apply for job</a>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="vacancy-card">
+                <h3 class="vacancy-card-title">Furniture Installer</h3>
+                <p class="vacancy-card-subtitle">Salary: 1000$</p>
+                <p class="vacancy-card-desc">Full-time. Work experience from 3 years. Work schedule is five days from 9:00 a.m. to 6:00 p.m. Weekends and overwork are paid separately by the hour. Possible business trips.</p>
+                <a href="vacancy-apprentice-carpenter.html" class="vacancy-card-btn">Apply for job</a>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="vacancy-card">
+                <h3 class="vacancy-card-title">Customer care</h3>
+                <p class="vacancy-card-subtitle">Salary: 800$</p>
+                <p class="vacancy-card-desc">Full-time. Work experience not needed. Work schedule is five days from 9:00 a.m. to 6:00 p.m. Weekends and overwork are paid separately by the hour. Possible business trips.</p>
+                <a href="vacancy-furniture-designer.html" class="vacancy-card-btn">Apply for job</a>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="vacancy-card">
+                <h3 class="vacancy-card-title">Sales Agent</h3>
+                <p class="vacancy-card-subtitle">Salary: 500$</p>
+                <p class="vacancy-card-desc">Full-time. Work experience from 3 years. You will be the primary link between our workshop and the world of professional interior design and architecture.</p>
+                <a href="vacancy-master-carver.html" class="vacancy-card-btn">Apply for job</a>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dresser | SOLE - Bespoke Wooden Furniture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { background-color: var(--color-bg); }
+        .hero {
+            position: relative; width: 100%; height: 720px; background-color: #331D0F;
+            display: flex; align-items: flex-start; justify-content: space-between;
+            color: var(--color-white); padding-top: 176px; overflow: hidden; margin-bottom: 74px;
+        }
+        .catalogue-container { max-width: 1232px; margin: 0 auto; padding: 0 0 104px; }
+        .catalogue-grid { column-count: 4; column-gap: 16px; width: 100%; }
+        .product-card {
+            position: relative; background-color: var(--color-white); border-radius: 12px;
+            overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(221, 92, 0, 0.25); }
+        .product-card::before {
+            content: ''; position: absolute; inset: 0; background-size: 100% 100%;
+            background-repeat: no-repeat; background-position: center; opacity: 0;
+            transition: opacity 0.3s ease; z-index: 5; pointer-events: none;
+        }
+        .product-card:hover::before { opacity: 1; }
+        .product-card.card-small::before { background-image: url('assets/Catalogue small card frame.png'); }
+        .product-card.card-large::before { background-image: url('assets/Gallery hover 608x608(orange).png'); }
+        .product-card::after {
+            content: 'see the product'; position: absolute; inset: 0;
+            background-color: rgba(221, 92, 0, 0.5); display: flex; align-items: center;
+            justify-content: center; color: white; font-size: 20px; font-weight: 400;
+            opacity: 0; transition: opacity 0.3s ease; z-index: 4; pointer-events: none;
+        }
+        .product-card:hover::after { opacity: 1; }
+        .product-image-area { position: relative; width: 100%; background-color: #D9D9D9; }
+        .h-small { height: 296px; }
+        .h-large { height: 565px; }
+        .product-image-area img { width: 100%; height: 100%; object-fit: cover; }
+        .product-content { padding: 20px; display: flex; flex-direction: column; gap: 4px; }
+        .product-name { font-family: 'Urbanist', sans-serif; font-size: 18px; font-weight: 500; line-height: 1.2; color: var(--color-dark); margin-bottom: 4px; }
+        .product-dims { font-family: 'Urbanist', sans-serif; font-size: 11px; font-weight: 500; color: #888888; text-transform: uppercase; }
+        .product-card-link { text-decoration: none; color: inherit; display: block; break-inside: avoid; }
+        @media (max-width: 1200px) { .catalogue-grid { column-count: 3; } }
+    </style>
+</head>
+<body>
+            <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container grid-12" style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+            <div class="hero-content">
+                <h1 class="hero-title animate-title">dReSSeR</h1>
+                <p class="hero-subtitle">Refined storage for your most personal spaces. Our dressers are built with smooth-gliding drawers and a finish that begs to be touched, bringing organization and elegance to your bedroom.</p>
+                <a href="dresser-configurator.html" class="btn btn-primary hero-btn">Configurator</a>
+            </div>
+            <div class="hero-image-side-container">
+                <img src="assets/hero section frame.png" alt="Furniture hero frame" class="hero-image-side-bg">
+                <div class="hero-animated-slides">
+                    <img src="assets/hero_animation/Drawer.png" class="hero-animated-slide active" alt="Bespoke Dresser">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="catalogue-container" id="catalogue">
+        <div class="catalogue-grid">
+            <a href="Product page.html" class="product-card-link">
+                <article class="product-card card-small">
+                    <div class="product-image-area h-small">
+                        <img src="reference/Catalogue photo/dressers/dresser 1.png" alt="Dresser">
+                        <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Vertical doors dresser</h3>
+                        <span class="product-dims">W 160 D 50 H 85 cm</span>
+                    </div>
+                </article>
+            </a>
+            <a href="Product page.html" class="product-card-link">
+                <article class="product-card card-small">
+                    <div class="product-image-area h-small">
+                        <img src="reference/Catalogue photo/dressers/dresser 2.png" alt="Dresser">
+                        <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Hanging dresser with drawers</h3>
+                        <span class="product-dims">W 80 D 45 H 140 cm</span>
+                    </div>
+                </article>
+            </a>
+            <a href="Product page.html" class="product-card-link">
+                <article class="product-card card-small">
+                    <div class="product-image-area h-small">
+                        <img src="reference/Catalogue photo/dressers/dresser 3.png" alt="Dresser">
+                        <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Hanging dresser with drawers</h3>
+                        <span class="product-dims">W 160 D 50 H 85 cm</span>
+                    </div>
+                </article>
+            </a>
+            <a href="Product page.html" class="product-card-link">
+                <article class="product-card card-small">
+                    <div class="product-image-area h-small">
+                        <img src="reference/Catalogue photo/dressers/dresser 4.png" alt="Dresser">
+                        <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name" style="font-size: 20px; font-weight: 400;">Different vertical surface material</h3>
+                        <span class="product-dims">W 80 D 45 H 140 cm</span>
+                    </div>
+                </article>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

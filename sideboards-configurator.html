@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sIDeBOARdS cONFIGuRATOr | Sole</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#DD5C00',
+                        white: '#FFFFFF',
+                        dark: '#331D0F',
+                        terracotta: '#DD5C00'
+                    },
+                    fontFamily: {
+                        sans: ['Urbanist', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS2DRenderer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { font-family: 'Urbanist', sans-serif; background-color: #FFFFFF; overflow-y: auto; height: auto; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d1d5db; }
+        
+        .active-tab { border-bottom: 2px solid #331D0F; color: #331D0F; }
+        .depth-btn.active { border-color: #331D0F; background: #331D0F; color: white; }
+        .finisher-toggle.active { background: #331D0F; color: white; }
+        
+        /* Global range styles removed to avoid conflict with .custom-range */
+
+        /* Dimension Labels */
+        .dimension-label {
+            pointer-events: none;
+            white-space: nowrap;
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border: 1px solid #331D0F !important;
+            color: #331D0F;
+            font-family: 'Urbanist', sans-serif;
+            z-index: 10;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .bg-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #e5e7eb;
+            transition: transform 0.2s;
+        }
+        .bg-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        /* Layout Structure */
+        .page-container {
+            width: 100%;
+            max-width: 1232px;
+            margin: 0 auto;
+            padding: 176px 0 104px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-family: var(--font-heading);
+            font-size: 45px;
+            color: var(--color-dark);
+            margin-bottom: 56px;
+            font-weight: 400;
+            text-transform: none;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start; /* Avoid stretching to full height */
+        }
+
+        /* 3D Viewport Card */
+        #viewer-card {
+            flex: 1;
+            height: 676px; /* Fixed height for the visible frame */
+            background: #F5F5F5;
+            border-radius: 11px;
+            overflow: hidden; /* This creates the "crop" effect */
+            position: sticky;
+            top: 96px; /* Below the header (76px + 20px margin) */
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+        }
+
+        #threejs-mount {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 724px; /* Taller internally to allow 24px crop from top/bottom */
+            transform: translateY(-50%);
+            border-radius: 11px;
+            z-index: 1;
+        }
+
+        .viewport-overlay {
+            position: absolute;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        /* Configuration Sidebar */
+...
+.door-indicator {
+    position: absolute;
+    width: 182px;
+    height: 38px;
+    background: #FFFFFF !important;
+    border-radius: 5px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    left: 5px;
+}
+
+.door-indicator::after {
+    content: '';
+    position: absolute;
+    width: 192px;
+    height: 48px;
+    top: -5px;
+    left: -5px;
+    background: url('assets/frame w192.png') no-repeat center;
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.door-indicator.w-140 {
+    width: 126px;
+}
+.door-indicator.w-140::after {
+    width: 150px;
+    height: 48px;
+    top: -5px;
+    left: -12px;
+    background: url('assets/frame w150.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.door-btn {
+    position: relative;
+    height: 38px;
+    z-index: 2;
+    background: none !important;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, background 0.3s ease;
+}
+.door-btn.w-182 { width: 182px; flex: none; }
+.door-btn.w-126 { width: 126px; flex: none; }
+
+.door-btn.active {
+    color: #000000;
+    background: #FFFFFF !important;
+    border-radius: 5px;
+}
+        #config-sidebar {
+            width: 504px;
+            background: #FFFFFF;
+            border-radius: 11px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 30px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            align-items: center;
+        }
+
+        .config-content-wrapper {
+            width: 400px;
+            padding: 40px 0;
+        }
+
+        .config-title {
+            font-size: 35px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .config-price {
+            font-size: 40px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 48px;
+        }
+
+        .slider-container {
+            background: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+
+        .slider-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .slider-name {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-dark);
+            text-transform: none;
+        }
+
+        .slider-value {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+        }
+
+        /* Depth Selector Styles */
+        .depth-selector-container {
+            width: 400px;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+
+        .depth-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .depth-selector {
+            position: relative;
+            width: 400px;
+            height: 48px;
+            background: #331D0F;
+            border-radius: 10px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .depth-indicator {
+            position: absolute;
+            width: 78px; 
+            height: 38px;
+            background: #FFFFFF;
+            border-radius: 5px;
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The orange frame asset on top of the white indicator */
+        .depth-indicator::after {
+            content: '';
+            position: absolute;
+            width: 88px;
+            height: 48px;
+            top: -5px;
+            left: -5px;
+            background: url('assets/frame w88.png') no-repeat center;
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .depth-btn {
+            position: relative;
+            width: 78px;
+            height: 38px;
+            z-index: 2;
+            background: none !important;
+            border: none;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+            flex: none;
+        }
+
+        .depth-btn.active {
+            color: #000000;
+        }
+
+        /* Columns Selector Styles */
+        .columns-selector-container {
+            width: 400px;
+            margin-bottom: 24px;
+            margin-top: 0;
+        }
+
+        .columns-label {
+            display: block;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .columns-selector {
+            width: 128px;
+            height: 48px;
+            background: #331D0F;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+        }
+
+
+
+        .col-value {
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 500;
+            flex-grow: 1;
+            text-align: center;
+        }
+/* Materials Selector Styles */
+.materials-selector-container {
+    width: 400px;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+.materials-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-dark);
+    margin-bottom: 8px;
+}
+...
+.material-toggle-btn.active {
+    color: #000000;
+}
+
+/* Swatch Grid Styles */
+.swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 40px);
+    gap: 11.5px;
+    margin-top: 16px;
+    width: 400px;
+}
+
+.material-opt {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.material-opt:hover {
+    transform: scale(1.1);
+}
+
+.material-opt.active {
+    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #331D0F;
+}
+
+/* Slider Markers for Height Breakpoints */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.slider-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #331D0F;
+    border-radius: 2px;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.slider-markers {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    padding: 0 8px;
+    z-index: 2;
+}
+
+.slider-marker {
+        width: 12px;
+        height: 12px;
+        background: #FFFFFF;
+        border: 2px solid #DD5C00;
+        border-radius: 3px;
+    }
+
+/* Ensure sliders sit on top of markers but track is visible */
+.slider-wrapper .custom-range {
+    position: relative;
+    z-index: 3;
+    background: transparent;
+}
+
+.slider-wrapper .custom-range::-webkit-slider-runnable-track {
+    background: transparent !important;
+}
+.slider-wrapper .custom-range::-moz-range-track {
+    background: transparent !important;
+}
+
+.custom-range {
+    position: relative;
+    z-index: 1;
+}
+
+/* Functionality Section Styles */
+.functionality-title {
+    font-size: 35px;
+    font-weight: 500;
+    color: var(--color-dark);
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.func-col-selector {
+    position: relative;
+    height: 48px;
+    background: #331D0F;
+    border-radius: 10px;
+    padding: 5px;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.func-col-indicator {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.func-col-indicator::after {
+    content: '';
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    top: -5px;
+    left: -5px;
+    background: url('assets/frame w48.png') no-repeat center;
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.func-col-btn {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    z-index: 2;
+    background: none !important;
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    flex: none;
+}
+
+.func-col-btn.active {
+    color: #000000;
+}
+
+.materials-selector {
+            position: relative;
+            width: 400px;
+            height: 48px;
+            background: #331D0F;
+            border-radius: 10px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .materials-indicator {
+            position: absolute;
+            width: 182px;
+            height: 38px;
+            background: #FFFFFF;
+            border-radius: 5px;
+            z-index: 1;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            left: 5px;
+        }
+
+        .materials-indicator::after {
+            content: '';
+            position: absolute;
+            width: 192px;
+            height: 48px;
+            top: -5px;
+            left: -5px;
+            background: url('assets/frame w192.png') no-repeat center;
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .material-toggle-btn {
+            position: relative;
+            width: 182px;
+            height: 38px;
+            z-index: 2;
+            background: none !important;
+            border: none;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+            flex: none;
+        }
+
+        .material-toggle-btn.active {
+            color: #000000;
+        }
+        .custom-range {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background: transparent;
+            outline: none;
+            margin: 0;
+            border: none; /* Remove any border */
+        }
+
+        /* Track */
+        .custom-range::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: #331D0F;
+            border-radius: 2px;
+            cursor: pointer;
+            border: none; /* Remove any border */
+            box-shadow: none; /* Remove any shadow */
+        }
+        .custom-range::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            background: #331D0F;
+            border-radius: 2px;
+            cursor: pointer;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Interior Setup Styles */
+        .interior-setup-container {
+            width: 400px;
+            height: 112px;
+            background: #331D0F;
+            border-radius: 10px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            position: relative;
+            align-items: center;
+        }
+
+        .interior-indicator {
+            position: absolute;
+            width: 82px;
+            height: 112px;
+            background: url('assets/frame w84 h112.png') no-repeat center;
+            background-size: 100% 100%;
+            z-index: 1;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            left: 1px;
+            pointer-events: none;
+        }
+
+        .interior-btn {
+            position: relative;
+            width: 74px;
+            height: 102px;
+            border-radius: 5px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            cursor: pointer;
+            z-index: 2;
+            padding: 0;
+            background-color: #FFFFFF; /* Buttons are white */
+        }
+
+        .interior-label {
+            display: block;
+            font-size: 16px; /* 16px title */
+            font-weight: 400; /* Regular style */
+            color: var(--color-dark);
+            margin-bottom: 8px; /* Adjusted margin */
+            line-height: 1.2;
+        }
+
+        /* Thumb */
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #DD5C00;
+            cursor: pointer;
+            margin-top: -6px; /* Center thumb on track */
+            border: none;
+            box-shadow: none;
+        }
+        .custom-range::-moz-range-thumb {
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #DD5C00;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+                <div class="container header-wrapper">
+        <header class="header">
+            <a href="index.html" class="logo">sole</a>
+            <button class="burger-menu-btn" id="burgerMenuBtn" aria-label="Toggle menu">
+                <i class="ph ph-list"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="about.html">About</a>
+                <a href="gallery.html">Gallery</a>
+                <div class="nav-item-dropdown active-dropdown-group">
+                    <a href="javascript:void(0)" class="dropdown-toggle">Catalogue <i class="ph ph-caret-down"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="closet.html">Closet</a>
+                        <a href="tables.html">Tables</a>
+                        <a href="dresser.html">Dresser</a>
+                        <a href="sideboards.html">Sideboards</a>
+                        <a href="pet-houses.html">Pet houses</a>
+                    </div>
+                </div>
+                <a href="vacancies.html">Vacancies</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="wishlist.html" class="wishlist-btn"><i class="ph ph-heart"></i></a>
+            </nav>
+        </header>
+    </div>
+
+
+
+
+        <!-- Main Configurator Section -->
+        <div class="main-layout">
+            <!-- Left: 3D Viewport Card -->
+            <div id="viewer-card">
+                <!-- 3D Canvas will be mounted here -->
+                <div id="threejs-mount"></div>
+
+                <!-- Scene UI Overlays (contained within visible frame) -->
+                
+                <!-- Background Switcher (Top-Left) -->
+                <div class="viewport-overlay top-6 left-6 flex items-center space-x-2 bg-white/80 backdrop-blur-md p-2 rounded-2xl shadow-sm border border-white">
+                    <button class="bg-swatch bg-[#FFFFFF]" data-color="#FFFFFF" title="White"></button>
+                    <button class="bg-swatch bg-[#F5F5F5]" data-color="#F5F5F5" title="Light Grey"></button>
+                    <button class="bg-swatch bg-[#FFFFFF]" data-color="#FFFFFF" title="White"></button>
+                </div>
+
+                <!-- Canvas Overlay Controls (Bottom) -->
+                <div class="viewport-overlay bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-4">
+                    <!-- Floating Viewport Menu -->
+                    <div class="flex items-center space-x-2 bg-white/80 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-white">
+                        <button id="zoom-in" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors text-dark">
+                            <i class="fas fa-plus text-xl"></i>
+                        </button>
+                        <button id="zoom-out" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors text-dark">
+                            <i class="fas fa-minus text-xl"></i>
+                        </button>
+                        <div class="w-px h-8 bg-gray-200 mx-1"></div>
+                        <button id="toggle-dims" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-all text-dark">
+                            <i class="ph ph-ruler text-2xl"></i>
+                        </button>
+                        <div class="w-px h-8 bg-gray-200 mx-1"></div>
+                        <button id="toggle-doors" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-all text-dark">
+                            <i class="ph ph-door text-2xl"></i>
+                        </button>
+                        <div class="w-px h-8 bg-gray-200 mx-1"></div>
+                        <button id="scroll-to-spec" class="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-all text-dark" title="View Specification">
+                            <i class="ph ph-info text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Configuration Sidebar Card -->
+            <aside id="config-sidebar">
+                <div class="config-content-wrapper">
+                    <h2 class="config-title">Form of the closet</h2>
+                    <div class="config-price current-price">£4982</div>
+
+                    <div class="mb-0">
+                        <div class="slider-container">
+                            <div class="slider-label-row">
+                                <span class="slider-name">Width</span>
+                                <span id="width-val" class="slider-value">160cm</span>
+                            </div>
+                            <input type="range" id="width-slider" min="80" max="320" value="160" class="custom-range">
+                        </div>
+
+                        <div class="slider-container">
+                            <div class="slider-label-row">
+                                <span class="slider-name">Height</span>
+                                <span id="height-val" class="slider-value">210cm</span>
+                            </div>
+                            <input type="range" id="height-slider" min="120" max="300" value="210" class="custom-range">
+                        </div>
+                    </div>
+
+                    <!-- Other filters will follow -->
+                    <div id="additional-form-filters" class="flex flex-col">
+                        <!-- Depth Selector -->
+                        <div class="depth-selector-container">
+                            <label class="depth-label">Depth</label>
+                            <div class="depth-selector" id="depthSelector">
+                                <div class="depth-indicator" id="depthIndicator"></div>
+                                <button class="depth-btn" data-value="25" data-index="0">25cm</button>
+                                <button class="depth-btn" data-value="35" data-index="1">35cm</button>
+                                <button class="depth-btn" data-value="45" data-index="2">45cm</button>
+                                <button class="depth-btn active" data-value="55" data-index="3">55cm</button>
+                            </div>
+                        </div>
+
+                        <!-- Columns Selector -->
+                        <div class="columns-selector-container">
+                            <label class="columns-label">Columns</label>
+                            <div class="columns-selector">
+                                <button id="minus-col" class="col-btn" aria-label="Decrease columns"><i class="ph ph-minus"></i></button>
+                                <span id="col-val" class="col-value">2</span>
+                                <button id="plus-col" class="col-btn" aria-label="Increase columns"><i class="ph ph-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Materials Selector -->
+                        <div class="materials-selector-container" style="margin-bottom: 0;">
+                            <label class="materials-label">Materials</label>
+                            <div class="materials-selector" id="materialsSelector">
+                                <div class="materials-indicator" id="materialsIndicator"></div>
+                                <button class="material-toggle-btn active" data-type="painted">Colors</button>
+                                <button class="material-toggle-btn" data-type="wood">Wood</button>
+                            </div>
+                        </div>
+
+                        <!-- Sub-menus for colors -->
+                        <div class="swatch-grid" style="margin-top: 16px; margin-bottom: 24px;">
+                            <div id="painted-options" class="contents">
+                                <button class="material-opt bg-[#333333] ring-2 ring-offset-2 ring-dark" data-value="graphite" title="Graphite"></button>
+                                <button class="material-opt bg-white border border-gray-200" data-value="white" title="White"></button>
+                                <button class="material-opt bg-[#1B263B]" data-value="navy" title="Midnight Navy"></button>
+                                <!-- Placeholders for the 8x2 grid -->
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#555555] opacity-20" disabled></button>
+                            </div>
+                            <div id="wood-options" class="contents hidden">
+                                <button class="material-opt bg-[#C19A6B]" data-value="oak" title="Natural Oak"></button>
+                                <button class="material-opt bg-[#67413E]" data-value="walnut" title="American Walnut"></button>
+                                <button class="material-opt bg-[#D7B484]" data-value="pine" title="Scandinavian Pine"></button>
+                                <!-- Placeholders -->
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                                <button class="material-opt bg-[#A08060] opacity-20" disabled></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Function Panel -->
+                    <div id="function-panel-root" class="mt-12 pt-12 border-t border-gray-100">
+                        <h2 class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-6">Function</h2>
+                        <!-- Dynamic Content will be injected here by product-page.js -->
+                    </div>
+
+                    <!-- Footer Actions -->
+                    <div class="mt-12 pt-8 border-t border-gray-100 flex gap-4">
+                        <button onclick="document.getElementById('order-modal').classList.remove('hidden')" class="btn btn-primary btn-on-white">
+                            Order
+                        </button>
+                        <button id="wishlist-trigger" class="btn btn-secondary btn-on-white flex items-center justify-center gap-2" style="background-image: none; border: 1px solid var(--color-dark);">
+                            Add to Wishlist
+                            <i class="ph ph-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div> <!-- Close page-container -->
+    
+    <!-- Wishlist Modal -->
+    <div id="wishlist-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-dark/60 backdrop-blur-sm p-4">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-medium text-dark">Wishlist</h2>
+                <button onclick="document.getElementById('wishlist-modal').classList.add('hidden')" class="text-gray-400 hover:text-dark">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <div id="wishlist-items" class="text-gray-600">Your wishlist is empty.</div>
+        </div>
+    </div>
+
+    <!-- Your furniture specification Section -->
+    <section id="specification-section" class="mt-24 bg-[#331D0F] py-[74px] md:py-[82px] w-full rounded-[10px]">
+        <div class="max-w-7xl mx-auto px-8 md:px-16 grid md:grid-cols-2 gap-16 items-start">
+            <!-- Left: Title & CTA -->
+            <div class="md:sticky md:top-24 md:self-start">
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white">Your furniture<br>specification</h2>
+                <div class="flex flex-col gap-4 mt-8 w-full md:w-1/2">
+                    <button onclick="document.getElementById('order-modal').classList.remove('hidden')" class="btn btn-primary btn-on-dark" style="width: 192px; height: 48px;">
+                        <span>Send request order</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Accordions -->
+            <div id="specification-accordions" class="space-y-0">
+                <!-- Item 1: Dimensions -->
+                <div class="border-b border-white/20">
+                    <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                        Dimensions & details
+                        <i class="ph ph-plus text-sm"></i>
+                    </button>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                        <div class="grid grid-cols-2 gap-y-8 gap-x-4 pb-6">
+                            <!-- Group 1: Footprint -->
+                            <div class="space-y-4">
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Total Width</span><span id="spec-width" class="text-xl text-white font-medium">160</span> cm</div>
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Max Height</span><span id="spec-height" class="text-xl text-white font-medium">210</span> cm</div>
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Max Depth</span><span id="spec-depth" class="text-xl text-white font-medium">55</span> cm</div>
+                            </div>
+                            <!-- Group 2: Finish -->
+                            <div class="space-y-4">
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Colour</span><span id="spec-color-name" class="text-xl text-white font-medium uppercase">Graphite</span></div>
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">RAL Code</span><span id="spec-ral" class="text-xl text-white font-medium">7024</span></div>
+                                <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Sections</span><span id="spec-columns" class="text-xl text-white font-medium">2</span></div>
+                            </div>
+                            <!-- Group 3: Components -->
+                            <div class="space-y-4 col-span-2 border-t border-white/10 pt-6">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Doors</span><span id="spec-doors-count" class="text-xl text-white font-medium">x 2</span></div>
+                                    <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Drawers</span><span id="spec-drawers-count" class="text-xl text-white font-medium">x 0</span></div>
+                                    <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Back Panels</span><span class="text-xl text-white font-medium uppercase">Yes</span></div>
+                                    <div><span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">Cable Openings</span><span id="spec-cable-count" class="text-xl text-white font-medium">x 0</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/10 pt-4 pb-6">
+                            <span class="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-3">Internal Storage (Active Section)</span>
+                            <div id="spec-shelving" class="space-y-2 text-xs">
+                                Select a section to calculate precise internal shelf dimensions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2: Delivery time -->
+                <div class="border-b border-white/20">
+                    <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                        Delivery time
+                        <i class="ph ph-plus text-sm"></i>
+                    </button>
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                        <p class="pb-6">Our bespoke furniture is typically delivered and assembled within 4-6 weeks from the date of order confirmation.</p>
+                    </div>
+                </div>
+                <!-- Item 3: Material -->
+                    <div class="border-b border-white/20">
+                        <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                            Material
+                            <i class="ph ph-plus text-sm"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                            <div class="space-y-4 pb-6">
+                                <p><strong>Construction:</strong> High-grade 18mm engineered boards with reinforced 12mm back panels for structural integrity.</p>
+                                <p><strong>Finish:</strong> Premium UV-cured matte lacquer for scratch resistance and longevity.</p>
+                                <p><strong>Quality:</strong> Powder-coated aluminum profiles providing silent, smooth sliding mechanism.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 3: Assembly -->
+                    <div class="border-b border-white/20">
+                        <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                            Free assembly service
+                            <i class="ph ph-plus text-sm"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                            <p class="pb-6">We'll build it for you. Our professional team will deliver, build, secure to the wall, and recycle all packaging materials.</p>
+                        </div>
+                    </div>
+                    <!-- Item 4: Returns -->
+                    <div class="border-b border-white/20">
+                        <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                            Returns
+                            <i class="ph ph-plus text-sm"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                            <p class="pb-6">Every SOLE wardrobe is custom-made to your exact measurements, but we want you to be entirely satisfied. We offer a flexible return or component-replacement policy if any part does not match your ordered specifications. Contact our support team within 14 days of assembly for assistance.</p>
+                        </div>
+                    </div>
+                    <!-- Item 5: Stability & Child Safety -->
+                    <div class="border-b border-white/20">
+                        <button class="accordion-trigger w-full py-4 flex justify-between items-center text-left text-white font-medium text-lg hover:text-white/80 transition-colors">
+                            Stability & Child Safety
+                            <i class="ph ph-plus text-sm"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out text-white/70">
+                            <p class="pb-6">Your safety is our absolute priority. Due to the custom height and premium weight of our wardrobes, we require all units to be securely anchored to the wall. Our professional assembly team handles this completely free of charge during installation to ensure absolute stability, making it completely safe for homes with children and pets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacts">
+        <div class="container" style="max-width: 1232px; margin: 0 auto;">
+            <div class="contact-wrapper" style="grid-column: 2 / 12;">
+                <div class="contact-overlay" id="contactOverlay" style="display: none;">
+                    <div class="contact-overlay-content">
+                        <h3>Thank you for reaching out!<br>We'll be in contact with you soon.</h3>
+                    </div>
+                </div>
+                <div class="contact-container" style="display: grid; grid-template-columns: 4fr 6fr; gap: 28px;">
+                    <div class="contact-info">
+                        <h2 class="section-title">Tell us what you're looking for!</h2>
+                        <p class="contact-desc">Tell us about the piece you imagine. We'll help you select the right wood and bring the texture to life.</p>
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <small>Email</small>
+                                <span>Romanenko@gmail.com</span>
+                            </div>
+                            <div class="detail-item">
+                                <small>Phone</small>
+                                <span>0960887707</span>
+                            </div>
+                            <div class="detail-item">
+                                <small>Address</small>
+                                <span>Oreon, Israel</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form-wrapper" style="width: 100%;">
+                        <form class="contact-form" id="contactForm" style="display: flex; flex-direction: column; gap: 15px;">
+                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="field field--required">
+                                    <input type="text" placeholder="Name" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                                <div class="field field--required">
+                                    <input type="email" placeholder="Email" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                </div>
+                            </div>
+                            <div class="field field--required select-wrapper">
+                                <select required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <option value="" disabled selected>What furniture are you looking for?</option>
+                                    <option value="tables">Tables</option>
+                                    <option value="cabinets">Closet</option>
+                                    <option value="beds">Beds</option>
+                                    <option value="pet_houses">Pet houses</option>
+                                    <option value="ottomans">Ottomans</option>
+                                    <option value="dresser">Dresser</option>
+                                </select>
+                            </div>
+                            <div class="field field--required">
+                                <input type="text" placeholder="Preferred size and material?" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div class="textarea-wrapper">
+                                <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400" style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                                <div class="textarea-counter" data-for="contactForm">0/400</div>
+                            </div>
+                            <div class="form-submit">
+                                <button type="submit" class="btn btn-primary" style="font-size: 20px;">Send the form</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- COMPLETE YOUR ROOM Section -->
+    <section class="complete-room-section py-24">
+        <div class="catalogue-container">
+            <h2 class="catalogue-title">cOMPLeTE YOuR ROoM</h2>
+            <div class="catalogue-grid">
+                <!-- Product cards -->
+                <a href="closet-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/cabinet.jpg" alt="Cabinet">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Bespoke storage cabinet</h3>
+                            <span class="product-dims">W 180 D 45 H 210 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="tables-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/wood_oak.png" alt="Cabinet">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Oak kitchen dresser</h3>
+                            <span class="product-dims">W 150 D 40 H 180 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="dresser-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/wood_ash.png" alt="Cabinet">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Ash wood side table</h3>
+                            <span class="product-dims">W 50 D 50 H 60 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="pet-houses-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/hero_bg.png" alt="Cabinet">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Oak pet house</h3>
+                            <span class="product-dims">W 80 D 60 H 70 cm</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLETE YOUR ROOM Section -->
+    <section class="complete-room-section pt-[74px] pb-0">
+        <div class="catalogue-container">
+            <h2 class="catalogue-title">cOMPLeTE YOuR ROoM</h2>
+            <div class="catalogue-grid">
+                <!-- Product cards -->
+                <a href="closet-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/catalogue_photos/dresser_3.png" alt="Hanging light dresser">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Hanging light dresser</h3>
+                            <span class="product-dims">W 180 D 45 H 210 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="tables-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/catalogue_photos/tables_296x296_3.jpg" alt="Table inscribed in the wall">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Table inscribed in the wall</h3>
+                            <span class="product-dims">W 150 D 40 H 180 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="dresser-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/catalogue_photos/sideboards_296x296_1.png" alt="Low sideboard for the TV">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Low sideboard for the TV</h3>
+                            <span class="product-dims">W 50 D 50 H 60 cm</span>
+                        </div>
+                    </article>
+                </a>
+                <a href="pet-houses-configurator.html" class="product-card-link">
+                    <article class="product-card card-small">
+                        <div class="product-image-area h-small">
+                            <img src="assets/catalogue_photos/pet_houses_296x296_2.png" alt="Pet house with a roof">
+                            <button class="gallery-like like-btn" aria-label="Add to wishlist"><i class="ph ph-heart"></i></button>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-name">Pet house with a roof</h3>
+                            <span class="product-dims">W 80 D 60 H 70 cm</span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section style="margin-top: 74px; padding: 0 0 74px; max-width: 1232px; margin-left: auto; margin-right: auto; width: 100%;">
+        <h2 class="glendale-title" style="font-size: 45px; margin-bottom: 40px;">ReVIEWs</h2>
+        <!-- Right: Reviews Feed -->
+        <div class="lg:col-span-2 space-y-[16px]">
+            <!-- Review 1 -->
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
+                <div>
+                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                        <span>Elena V.</span>
+                        <span>•</span>
+                        <span>5 August 2025</span>
+                    </div>
+                    <div class="flex space-x-1 mb-3 text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-dark mb-2">Impeccable quality</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">The precision of the construction is incredible. It feels solid, looks minimalist, and the assembly team was extremely professional.</p>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
+                <div>
+                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                        <span>Mark R.</span>
+                        <span>•</span>
+                        <span>22 July 2025</span>
+                    </div>
+                    <div class="flex space-x-1 mb-3 text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-dark mb-2">Simple and solid</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Everything works as advertised. The sliding doors are smooth and completely silent. Worth every penny for the quality finish.</p>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
+                <div>
+                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                        <span>Sarah L.</span>
+                        <span>•</span>
+                        <span>15 July 2025</span>
+                    </div>
+                    <div class="flex space-x-1 mb-3 text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-dark mb-2">Perfect fit</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">The ability to customize measurements was the main reason I chose SOLE. It fits my awkward alcove like a glove.</p>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
+                <div>
+                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
+                        <span>Tom H.</span>
+                        <span>•</span>
+                        <span>1 July 2025</span>
+                    </div>
+                    <div class="flex space-x-1 mb-3 text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-dark mb-2">Great value</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">Compared to other custom furniture shops, this was by far the best experience. The quality of wood is top-tier.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <a href="index.html" class="footer-logo nav-active">
+                    <img src="assets/logo-footer.png" alt="SOLE Logo" style="width: 504px; height: 224px;">
+                </a>
+                <nav class="footer-main-nav">
+                    <a href="about.html">About</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="vacancies.html">Vacancies</a>
+                    <a href="contacts.html">Contacts</a>
+                    <a href="wishlist.html">Wishlist</a>
+                </nav>
+                <nav class="footer-catalogue-nav">
+                    <a href="closet.html">Closets</a>
+                    <a href="tables.html">Tables</a>
+                    <a href="dresser.html">Dressers</a>
+                    <a href="sideboards.html">Sideboards</a>
+                    <a href="pet-houses.html">Pet houses</a>
+                </nav>
+                <div class="footer-contact-social">
+                    <div class="footer-contact-info">
+                        <div class="detail-item">
+                            <small>Email:</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone:</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address:</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="ph-fill ph-telegram-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

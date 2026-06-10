@@ -1,0 +1,19 @@
+.section-heading {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-tight);
+    font-weight: 400;
+    margin-bottom: var(--space-lg);
+}
+
+.section-heading-primary {
+    color: var(--color-primary);
+}
+
+.section-heading-light {
+    color: var(--color-white);
+}
+
+.section-heading-centered {
+    text-align: center;
+}
