@@ -690,6 +690,35 @@
             cursor: pointer;
             border: none;
         }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 120px 24px 64px !important;
+            }
+            .main-layout {
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+            .main-layout > div {
+                width: 100% !important;
+                height: auto !important;
+            }
+            .reviews-grid {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            .story-card-container {
+                width: 100% !important;
+                height: 320px !important;
+            }
+            .vacancy-sidebar {
+                width: 100% !important;
+                position: static !important;
+            }
+            .contact-container {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1013,14 +1042,14 @@
 
     <!-- Contact Section -->
     <section class="contact-section" id="contacts">
-        <div class="container" style="max-width: 1232px; margin: 0 auto;">
-            <div class="contact-wrapper" style="grid-column: 2 / 12;">
+        <div class="container grid-12">
+            <div class="contact-wrapper">
                 <div class="contact-overlay" id="contactOverlay" style="display: none;">
                     <div class="contact-overlay-content">
                         <h3>Thank you for reaching out!<br>We'll be in contact with you soon.</h3>
                     </div>
                 </div>
-                <div class="contact-container" style="display: grid; grid-template-columns: 4fr 6fr; gap: 28px;">
+                <div class="contact-container">
                     <div class="contact-info">
                         <h2 class="section-title">Tell us what you're looking for!</h2>
                         <p class="contact-desc">Tell us about the piece you imagine. We'll help you select the right wood and bring the texture to life.</p>
@@ -1039,18 +1068,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="contact-form-wrapper" style="width: 100%;">
-                        <form class="contact-form" id="contactForm" style="display: flex; flex-direction: column; gap: 15px;">
-                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="contact-form-wrapper">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
                                 <div class="field field--required">
-                                    <input type="text" placeholder="Name" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <input type="text" placeholder="Name" required>
                                 </div>
                                 <div class="field field--required">
-                                    <input type="email" placeholder="Email" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                    <input type="email" placeholder="Email" required>
                                 </div>
                             </div>
                             <div class="field field--required select-wrapper">
-                                <select required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                <select required>
                                     <option value="" disabled selected>What furniture are you looking for?</option>
                                     <option value="tables">Tables</option>
                                     <option value="cabinets">Closet</option>
@@ -1061,14 +1090,14 @@
                                 </select>
                             </div>
                             <div class="field field--required">
-                                <input type="text" placeholder="Preferred size and material?" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                                <input type="text" placeholder="Preferred size and material?" required>
                             </div>
                             <div class="textarea-wrapper">
-                                <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400" style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                                <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400"></textarea>
                                 <div class="textarea-counter" data-for="contactForm">0/400</div>
                             </div>
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-primary" style="font-size: 20px;">Send the form</button>
+                                <button type="submit" class="btn btn-primary">Send the form</button>
                             </div>
                         </form>
                     </div>
@@ -1138,78 +1167,104 @@
     </section>
 
     <!-- Customer Reviews Section -->
-    <section style="margin-top: 74px; padding: 0 0 74px; max-width: 1232px; margin-left: auto; margin-right: auto; width: 100%;">
+    <section class="stories" id="reviews" style="margin-top: 74px; padding: 0 0 74px; max-width: 1232px; margin-left: auto; margin-right: auto; width: 100%;">
         <h2 class="glendale-title" style="font-size: 45px; margin-bottom: 40px;">ReVIEWs</h2>
-        <!-- Right: Reviews Feed -->
-        <div class="lg:col-span-2 space-y-[16px]">
-            <!-- Review 1 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
-                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
-                <div>
-                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-                        <span>Elena V.</span>
-                        <span>•</span>
-                        <span>5 August 2025</span>
+        
+        <div class="reviews-grid">
+            <!-- Card 1 -->
+            <article class="story-card-container">
+                <div class="story-card">
+                    <div class="story-card-front">
+                        <div class="quote-icon">&ldquo;</div>
+                        <p class="story-text">The cabinet became the quiet center of our living room. Every line feels intentional and warm.</p>
+                        <div class="story-author">
+                            <img src="assets/person_avatar.png" alt="Client portrait">
+                            <div class="author-info">
+                                <strong>Maya Cohen</strong>
+                                <span>Configurated cabinet</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex space-x-1 mb-3 text-accent text-xs">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="story-card-back">
+                        <img src="assets/cabinet.jpg" alt="Custom wooden cabinet">
                     </div>
-                    <h4 class="text-lg font-medium text-dark mb-2">Impeccable quality</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed">The precision of the construction is incredible. It feels solid, looks minimalist, and the assembly team was extremely professional.</p>
                 </div>
-            </div>
-
-            <!-- Review 2 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
-                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
-                <div>
-                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-                        <span>Mark R.</span>
-                        <span>•</span>
-                        <span>22 July 2025</span>
+            </article>
+            <!-- Card 2 -->
+            <article class="story-card-container">
+                <div class="story-card">
+                    <div class="story-card-front">
+                        <div class="quote-icon">&ldquo;</div>
+                        <p class="story-text">The material consultation helped us choose a finish that works with light, pets, and daily use.</p>
+                        <div class="story-author">
+                            <img src="assets/avatar_2.png" alt="Client portrait">
+                            <div class="author-info">
+                                <strong>Noa Bar</strong>
+                                <span>Pet house</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex space-x-1 mb-3 text-accent text-xs">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="story-card-back">
+                        <img src="assets/review_dresser.jpg" alt="Custom dresser">
                     </div>
-                    <h4 class="text-lg font-medium text-dark mb-2">Simple and solid</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed">Everything works as advertised. The sliding doors are smooth and completely silent. Worth every penny for the quality finish.</p>
                 </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
-                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
-                <div>
-                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-                        <span>Sarah L.</span>
-                        <span>•</span>
-                        <span>15 July 2025</span>
+            </article>
+            <!-- Card 3 -->
+            <article class="story-card-container">
+                <div class="story-card">
+                    <div class="story-card-front">
+                        <div class="quote-icon">&ldquo;</div>
+                        <p class="story-text">We wanted storage that did not feel heavy. SOLE matched the proportions to the room perfectly.</p>
+                        <div class="story-author">
+                            <img src="assets/avatar_2.png" alt="Client portrait">
+                            <div class="author-info">
+                                <strong>Daniel Levi</strong>
+                                <span>Dresser</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex space-x-1 mb-3 text-accent text-xs">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="story-card-back">
+                        <img src="assets/review_pet_house.png" alt="Custom pet house">
                     </div>
-                    <h4 class="text-lg font-medium text-dark mb-2">Perfect fit</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed">The ability to customize measurements was the main reason I chose SOLE. It fits my awkward alcove like a glove.</p>
                 </div>
-            </div>
-
-            <!-- Review 4 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
-                <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
-                <div>
-                    <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-                        <span>Tom H.</span>
-                        <span>•</span>
-                        <span>1 July 2025</span>
+            </article>
+            <!-- Card 4 -->
+            <article class="story-card-container">
+                <div class="story-card">
+                    <div class="story-card-front">
+                        <div class="quote-icon">&ldquo;</div>
+                        <p class="story-text">The final piece looks handmade without feeling rustic. It fits our apartment exactly.</p>
+                        <div class="story-author">
+                            <img src="assets/person_avatar.png" alt="Client portrait">
+                            <div class="author-info">
+                                <strong>Oren Katz</strong>
+                                <span>Configurated wardrobe</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex space-x-1 mb-3 text-accent text-xs">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="story-card-back">
+                        <img src="assets/review_wardrobe.jpg" alt="Custom wardrobe">
                     </div>
-                    <h4 class="text-lg font-medium text-dark mb-2">Great value</h4>
-                    <p class="text-sm text-gray-600 leading-relaxed">Compared to other custom furniture shops, this was by far the best experience. The quality of wood is top-tier.</p>
                 </div>
-            </div>
+            </article>
         </div>
+
+        <!-- Review Form -->
+        <aside class="vacancy-sidebar" style="width: 100%; max-width: 608px; margin: 0 auto;">
+            <div class="apply-card">
+                <h3 style="margin-bottom: 24px;">Leave your review!</h3>
+                <form class="apply-form">
+                    <div class="input-wrapper">
+                        <input type="text" placeholder="Full Name" required>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <textarea placeholder="Your review" rows="4"></textarea>
+                    <button type="submit" class="btn btn-primary apply-btn">Submit Review</button>
+                </form>
+            </div>
+        </aside>
     </section>
 
     <!-- Footer -->

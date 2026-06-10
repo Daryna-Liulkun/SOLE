@@ -68,6 +68,35 @@
             object-fit: cover;
             display: block; /* Remove baseline gaps */
         }
+
+        @media (max-width: 768px) {
+            .about-hero .container > div {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            .contacts-details-col {
+                grid-template-columns: 1fr !important;
+                margin-top: 20px !important;
+            }
+            .service-item {
+                gap: 40px !important;
+                margin-bottom: 64px !important;
+            }
+            .service-item > div {
+                max-width: 100% !important;
+            }
+            .about-join-content-wrapper {
+                width: 100% !important;
+                padding: 0 24px !important;
+            }
+            .about-join-grid {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            .about-media--wide {
+                height: 250px !important;
+            }
+        }
     </style>
 </head>
 <body>

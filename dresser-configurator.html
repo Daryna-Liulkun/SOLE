@@ -931,7 +931,7 @@
 
     <!-- Your furniture specification Section -->
     <section id="specification-section" class="mt-24 bg-[#331D0F] py-[74px] md:py-[82px] w-full rounded-[10px]">
-        <div class="max-w-7xl mx-auto px-8 md:px-16 grid md:grid-cols-2 gap-16 items-start">
+        <div class="max-w-7xl mx-auto px-6 md:px-16 grid md:grid-cols-2 gap-16 items-start">
             <!-- Left: Title & CTA -->
             <div class="md:sticky md:top-24 md:self-start">
                 <h2 class="text-4xl md:text-5xl font-medium tracking-tight text-white">Your furniture<br>specification</h2>
@@ -1040,74 +1040,6 @@
             </div>
         </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section" id="contacts">
-        <div class="container" style="max-width: 1232px; margin: 0 auto;">
-            <div class="contact-wrapper" style="grid-column: 2 / 12;">
-                <div class="contact-overlay" id="contactOverlay" style="display: none;">
-                    <div class="contact-overlay-content">
-                        <h3>Thank you for reaching out!<br>We'll be in contact with you soon.</h3>
-                    </div>
-                </div>
-                <div class="contact-container" style="display: grid; grid-template-columns: 4fr 6fr; gap: 28px;">
-                    <div class="contact-info">
-                        <h2 class="section-title">Tell us what you're looking for!</h2>
-                        <p class="contact-desc">Tell us about the piece you imagine. We'll help you select the right wood and bring the texture to life.</p>
-                        <div class="contact-details">
-                            <div class="detail-item">
-                                <small>Email</small>
-                                <span>Romanenko@gmail.com</span>
-                            </div>
-                            <div class="detail-item">
-                                <small>Phone</small>
-                                <span>0960887707</span>
-                            </div>
-                            <div class="detail-item">
-                                <small>Address</small>
-                                <span>Oreon, Israel</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="contact-form-wrapper" style="width: 100%;">
-                        <form class="contact-form" id="contactForm" style="display: flex; flex-direction: column; gap: 15px;">
-                            <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <div class="field field--required">
-                                    <input type="text" placeholder="Name" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
-                                </div>
-                                <div class="field field--required">
-                                    <input type="email" placeholder="Email" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
-                                </div>
-                            </div>
-                            <div class="field field--required select-wrapper">
-                                <select required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
-                                    <option value="" disabled selected>What furniture are you looking for?</option>
-                                    <option value="tables">Tables</option>
-                                    <option value="cabinets">Closet</option>
-                                    <option value="beds">Beds</option>
-                                    <option value="pet_houses">Pet houses</option>
-                                    <option value="ottomans">Ottomans</option>
-                                    <option value="dresser">Dresser</option>
-                                </select>
-                            </div>
-                            <div class="field field--required">
-                                <input type="text" placeholder="Preferred size and material?" required style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;">
-                            </div>
-                            <div class="textarea-wrapper">
-                                <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400" style="width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
-                                <div class="textarea-counter" data-for="contactForm">0/400</div>
-                            </div>
-                            <div class="form-submit">
-                                <button type="submit" class="btn btn-primary" style="font-size: 20px;">Send the form</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
     <!-- COMPLETE YOUR ROOM Section -->
     <section class="complete-room-section pt-[74px] pb-0">
         <div class="catalogue-container">
@@ -1166,13 +1098,13 @@
         </div>
     </section>
 
-    <!-- Customer Reviews Section -->
-    <section style="margin-top: 74px; padding: 0 0 74px; max-width: 1232px; margin-left: auto; margin-right: auto; width: 100%;">
+    <!-- Customer Reviews & Contact Section -->
+    <section class="reviews-section" style="margin-top: 74px; padding: 0 0 74px; max-width: 1232px; margin-left: auto; margin-right: auto; width: 100%;">
         <h2 class="glendale-title" style="font-size: 45px; margin-bottom: 40px;">ReVIEWs</h2>
-        <!-- Right: Reviews Feed -->
-        <div class="lg:col-span-2 space-y-[16px]">
+        
+        <div class="reviews-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 80px;">
             <!-- Review 1 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset">
                 <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
                 <div>
                     <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
@@ -1189,7 +1121,7 @@
             </div>
 
             <!-- Review 2 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset">
                 <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
                 <div>
                     <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
@@ -1206,7 +1138,7 @@
             </div>
 
             <!-- Review 3 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset">
                 <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
                 <div>
                     <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
@@ -1223,7 +1155,7 @@
             </div>
 
             <!-- Review 4 -->
-            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset" style="width: 608px; height: 328px;">
+            <div class="flex gap-8 p-8 bg-white rounded-[10px] border border-gray-100 shadow-zero-offset">
                 <img src="assets/cabinet.jpg" alt="Reviewer Wardrobe" class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-[10px] flex-shrink-0">
                 <div>
                     <div class="flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
@@ -1236,6 +1168,68 @@
                     </div>
                     <h4 class="text-lg font-medium text-dark mb-2">Great value</h4>
                     <p class="text-sm text-gray-600 leading-relaxed">Compared to other custom furniture shops, this was by far the best experience. The quality of wood is top-tier.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form Underneath -->
+        <div class="contact-wrapper">
+            <div class="contact-overlay" id="contactOverlay" style="display: none;">
+                <div class="contact-overlay-content">
+                    <h3>Thank you for reaching out!<br>We'll be in contact with you soon.</h3>
+                </div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="section-title">Tell us what you're looking for!</h2>
+                    <p class="contact-desc">Tell us about the piece you imagine. We'll help you select the right wood and bring the texture to life.</p>
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <small>Email</small>
+                            <span>Romanenko@gmail.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Phone</small>
+                            <span>0960887707</span>
+                        </div>
+                        <div class="detail-item">
+                            <small>Address</small>
+                            <span>Oreon, Israel</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="field field--required">
+                                <input type="text" placeholder="Name" required>
+                            </div>
+                            <div class="field field--required">
+                                <input type="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="field field--required select-wrapper">
+                            <select required>
+                                <option value="" disabled selected>What furniture are you looking for?</option>
+                                <option value="tables">Tables</option>
+                                <option value="cabinets">Closet</option>
+                                <option value="beds">Beds</option>
+                                <option value="pet_houses">Pet houses</option>
+                                <option value="ottomans">Ottomans</option>
+                                <option value="dresser">Dresser</option>
+                            </select>
+                        </div>
+                        <div class="field field--required">
+                            <input type="text" placeholder="Preferred size and material?" required>
+                        </div>
+                        <div class="textarea-wrapper">
+                            <textarea placeholder="Detailed description (if needed)" rows="5" maxlength="400"></textarea>
+                            <div class="textarea-counter" data-for="contactForm">0/400</div>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btn btn-primary">Send the form</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
