@@ -176,8 +176,7 @@
             width: 192px;
             height: 48px;
             margin-top: 10px;
-            background-image: url('assets/frame w192.png');
-            background-size: cover;
+            background-color: var(--color-accent);
             border: none;
             cursor: pointer;
             transition: background 0.3s;
@@ -195,8 +194,10 @@
         }
 
         @media (max-width: 768px) {
-            .vacancy-detail-container { padding: 0 24px 60px; }
+            body { padding-top: 120px !important; }
+            .vacancy-detail-container { padding: 0 24px 60px; padding-top: 0 !important; }
             .detail-title { font-size: 36px; }
+            .apply-form input { width: 100%; }
         }
     </style>
 </head>

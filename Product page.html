@@ -73,6 +73,33 @@
             transform: scale(1.1);
         }
 
+        /* Contact Form Styles */
+        .contact-form input, 
+        .contact-form select, 
+        .contact-form textarea {
+            width: 100% !important;
+            height: 49px !important;
+            padding: 15.5px 16px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 4px !important;
+            font-family: inherit !important;
+            font-size: 14px !important;
+            background-color: #fff !important;
+            color: #331D0F !important;
+            box-sizing: border-box !important;
+        }
+        .contact-form input:focus, 
+        .contact-form select:focus, 
+        .contact-form textarea:focus {
+            outline: none !important;
+            border-color: #DD5C00 !important;
+        }
+
+        /* Specific height for detailed description textarea */
+        .contact-form .textarea-wrapper textarea {
+            height: 140px !important;
+        }
+
         /* Layout Structure */
         .page-container {
             width: 100%;
@@ -133,6 +160,8 @@
                 grid-template-columns: 1fr !important;
             }
         }
+
+
 
         .product-title {
             font-family: var(--font-heading);
@@ -813,7 +842,7 @@
     </div>
 
     <!-- Your furniture specification Section -->
-    <section id="specification-section" class="mt-24 bg-[#331D0F] py-[74px] md:py-[82px] w-full rounded-[10px]">
+    <section id="specification-section" class="mt-0 bg-[#331D0F] py-[74px] md:py-[82px] w-full rounded-[10px]">
         <div class="max-w-7xl mx-auto px-6 md:px-16 grid md:grid-cols-2 gap-16 items-start">
             <!-- Left: Title & CTA -->
             <div class="md:sticky md:top-24 md:self-start">
@@ -1009,7 +1038,7 @@
                         </div>
                     </article>
                 </a>
-                <a href="tables-configurator.html" class="product-card-link">
+                <a href="coming-soon.html" class="product-card-link">
                     <article class="product-card card-small">
                         <div class="product-image-area h-small">
                             <img src="assets/catalogue_photos/tables_296x296_3.jpg" alt="Table inscribed in the wall">

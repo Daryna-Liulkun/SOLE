@@ -1948,6 +1948,7 @@ select { appearance: none; }
         overflow: hidden !important;
         display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
     }
     .product-dims {
@@ -2160,7 +2161,5 @@ select { appearance: none; }
     }
 }
 
-;
-    }
-}
+
 
