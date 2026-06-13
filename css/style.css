@@ -138,8 +138,12 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     color: var(--color-white);
 }
 
-.nav a:hover {
+.nav a:hover:not(.dropdown-toggle) {
     background-image: url('../reference/Ux/Header hover.png');
+}
+
+.nav a.dropdown-toggle:hover {
+    background-image: none;
 }
 .nav a.nav-active {
     width: 78px;
@@ -182,8 +186,7 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(2px);
+    left: -35px;
     background-color: var(--color-dark);
     border-radius: 0 0 10px 10px;
     padding: 10px 0 0 0;
@@ -217,6 +220,7 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
 .dropdown-menu a:hover {
     background-color: transparent !important;
     color: var(--color-accent) !important;
+    background-image: none !important;
 }
 
 
@@ -359,9 +363,9 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     opacity: 0;
     filter: blur(8px);
     transform: scale(0.85) translateY(10px);
-    transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                filter 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: opacity 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+                filter 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .hero-animated-slide.active {
     opacity: 1;
@@ -393,7 +397,7 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     height: 1.1em;
     vertical-align: middle;
     overflow: visible;
-    transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .morph-letter .narrow-char {
@@ -403,7 +407,7 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     opacity: 1;
     transform: scaleX(1);
     transform-origin: left;
-    transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .morph-letter .wide-char {
@@ -413,7 +417,7 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     opacity: 0;
     transform: scaleX(0.6);
     transform-origin: left;
-    transition: opacity 0.8s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Expanded state trigger (mixed uppercase & wide lowercase) */
@@ -964,8 +968,9 @@ select { appearance: none; }
     background-image: url('../assets/frame w192.png');
 }
 .cta-content .btn:hover {
-    background-color: var(--color-white);
-    color: var(--color-dark);
+    background-color: transparent;
+    color: var(--color-white);
+    background-image: url('../reference/Ux/Button  hover white.png');
 }
 
 /* Materials Section */
@@ -1477,6 +1482,19 @@ select { appearance: none; }
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
+.card-corner {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 66px;
+    height: 66px;
+    background-image: url('../reference/Ux/%D0%BA%D1%83%D1%82%D0%B8%D0%BA%20w%2066%20h66.png');
+    background-repeat: no-repeat;
+    background-size: 66px 66px;
+    z-index: 15;
+    opacity: 1;
+}
+
 .product-card:hover, .product-card.show-overlay {
     transform: translateY(-4px);
     box-shadow: 0 0 30px rgba(221, 92, 0, 0.25);
@@ -1544,6 +1562,7 @@ select { appearance: none; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 
@@ -1733,7 +1752,7 @@ select { appearance: none; }
         width: 100%;
     }
 
-    /* Glendale font standardisation for mobile */
+    .vacancies-container { padding: 0 14px; }
     .hero-title, .intro-text h2, .stories .section-title, .services-header .section-title, .catalogue-title, .about-title, .gallery-heading h1 {
         font-family: var(--font-heading) !important;
         font-size: 35px !important;
@@ -1776,13 +1795,14 @@ select { appearance: none; }
     .nav a.nav-active {
         background-color: var(--color-white) !important;
         color: #000000 !important;
-        font-weight: 600;
+        font-weight: 400;
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 12px 24px;
-        min-width: 120px;
+        padding: 0;
+        width: 120px !important;
+        height: 50px !important;
         z-index: 2;
     }
     
@@ -1792,10 +1812,10 @@ select { appearance: none; }
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 130px;
+        width: 134px;
         height: 64px;
         background-image: url('../assets/Header hover.png') !important;
-        background-size: 130px 64px;
+        background-size: 134px 64px;
         z-index: 1;
         pointer-events: none;
         display: block !important;
@@ -1862,15 +1882,15 @@ select { appearance: none; }
     .nav-item-dropdown.active .dropdown-toggle i { 
         transform: rotate(0deg); 
     }
-    .dropdown-menu a { text-align: left; padding: 8px 0 !important; font-size: 20px; background-color: transparent !important; color: var(--color-white) !important; }
-    .dropdown-menu a.nav-active { background-color: var(--color-white) !important; color: #000000 !important; padding: 8px 16px !important; }
+    .dropdown-menu a { text-align: left; padding: 8px 0 !important; font-size: 20px; background-color: transparent !important; color: var(--color-white) !important; display: flex !important; justify-content: flex-start !important; }
+    .dropdown-menu a.nav-active { background-color: transparent !important; color: var(--color-accent) !important; padding: 8px 0 !important; font-weight: 400 !important; display: flex !important; justify-content: flex-start !important; }
     .dropdown-menu a.nav-active::before { display: none !important; }
 
     .grid-12 { grid-template-columns: 1fr; }
     
     /* Hero Mobile Refinement */
     .hero { 
-        height: 850px !important; 
+        height: auto !important; 
         padding-top: 104px !important; 
     }
     .hero .container { flex-direction: column-reverse; } /* Animation on top */
@@ -1929,6 +1949,7 @@ select { appearance: none; }
     .product-image-area img {
         height: 100% !important;
         width: 100% !important;
+        transition: transform 0.3s ease !important;
         object-fit: cover !important;
     }
     .product-content {
@@ -1970,18 +1991,24 @@ select { appearance: none; }
 
     /* Contact Mobile Refinement */
     .contact-wrapper { padding: 48px; } /* 40px + 8px */
+    .container:has(.contact-wrapper) { padding-left: 0 !important; padding-right: 0 !important; }
     
     /* Services Mobile Refinement */
-    .service-slide { 
+    .service-slide {
         padding: 20px;
-        height: 496px !important; 
-        min-height: 496px !important; 
+        height: 496px !important;
+        min-height: 496px !important;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; 
+        align-items: flex-start;
         position: relative;
     }
-    
+
+    .service-slide:nth-child(1) .service-icon,
+    .service-slide:nth-child(2) .service-icon {
+        padding-left: 20px;
+    }
+
     .service-number { 
         font-size: 80px; 
         margin-bottom: 5px;
@@ -1992,12 +2019,26 @@ select { appearance: none; }
     
     .service-icon { 
         position: static; 
-        width: 180px !important; 
-        height: 180px !important; 
+        width: 200px !important; 
+        height: 200px !important; 
         opacity: 1; 
         margin-bottom: 10px;
         margin-left: -20px; /* Counteract padding to stick to left edge */
         order: 2; /* Icon second */
+    }
+
+    .service-icon[src*="Icon bespoken furniture.png"],
+    .service-icon[src*="Icon Materials.png"] {
+        margin-left: 0 !important;
+        padding-left: 20px !important;
+    }
+
+    .card-corner {
+        width: 40px !important;
+        height: 40px !important;
+        background-size: 40px 40px !important;
+        z-index: 20 !important;
+        display: block !important;
     }
     
     .service-content { 
@@ -2159,7 +2200,220 @@ select { appearance: none; }
         height: 32px;
         font-size: 32px;
     }
-}
+
+    /* Closet Configurator Mobile Adaptation */
+    .config-content-wrapper {
+        padding: 32px !important; /* 32px padding for all sides */
+        width: 100% !important;
+        max-width: 342px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align content left */
+        margin: 0 auto;
+    }
+
+    .config-title {
+        font-size: 28px !important;
+        margin-bottom: 16px !important;
+        text-align: left !important;
+        width: 100%;
+        padding: 0 !important;
+    }
+
+    .config-price {
+        font-size: 32px !important;
+        margin-bottom: 32px !important;
+        text-align: left !important;
+        width: 100%;
+        padding: 0 !important;
+    }
+
+    .mb-0,
+    .slider-container,
+    .depth-selector-container,
+    .materials-selector-container,
+    .swatch-grid,
+    .interior-setup-container,
+    .enclosure-selector,
+    .door-selector,
+    #additional-form-filters,
+    #function-panel-root {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .depth-selector,
+    .materials-selector,
+    .enclosure-selector,
+    .door-selector,
+    .interior-setup-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Column filter in form section */
+    .columns-selector-container {
+        width: 100% !important;
+        max-width: 340px !important;
+    }
+    .columns-selector {
+        width: 100% !important;
+        max-width: 340px !important;
+    }
+
+    .swatch-grid {
+        grid-template-columns: repeat(auto-fill, 40px) !important;
+        justify-content: flex-start !important; /* Align left */
+        gap: 10px !important;
+    }
+
+    /* Selectors with Equal 6px Spacing and adjusted heights */
+    .depth-selector,
+    .materials-selector,
+    .enclosure-selector,
+    .door-selector {
+        display: flex !important;
+        height: 48px !important; 
+        padding: 6px !important;
+        gap: 6px !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+    }
+
+    .interior-setup-container {
+        display: flex !important;
+        height: 80px !important; 
+        padding: 6px !important;
+        gap: 6px !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+    }
+
+    /* Buttons with responsive height and equal spacing */
+    .depth-btn, 
+    .material-toggle-btn,
+    .enclosure-btn, 
+    .door-btn {
+        flex: 1 !important;
+        height: 36px !important; 
+        width: auto !important;
+        margin: 0 !important;
+        min-width: 0 !important;
+        font-size: 14px !important;
+    }
+
+    .interior-btn {
+        flex: 1 !important;
+        height: 68px !important; 
+        width: auto !important;
+        margin: 0 !important;
+        background-size: contain !important;
+    }
+
+    /* Revert functionality column picking filter to original look */
+    .func-col-btn {
+        flex: none !important;
+        width: 38px !important;
+        font-size: 16px !important;
+    }
+
+    /* Indicators with scaled widths and heights */
+    .depth-indicator, 
+    .materials-indicator, 
+    .enclosure-indicator, 
+    .door-indicator,
+    .func-col-indicator,
+    .interior-indicator {
+        display: flex !important;
+        z-index: 1 !important;
+        left: 6px !important; /* Align with 6px padding */
+    }
+
+    .depth-indicator { 
+        width: calc(25% - 7.5px) !important; 
+        height: 36px !important;
+    }
+    .materials-indicator, 
+    .enclosure-indicator, 
+    .door-indicator { 
+        width: calc(50% - 9px) !important; 
+        height: 36px !important;
+    }
+    .func-col-indicator { 
+        width: 38px !important; 
+        height: 38px !important; 
+    }
+    .interior-indicator { 
+        width: calc(20% - 7.2px) !important; 
+        height: 68px !important;
+        background: #FFFFFF !important;
+        border-radius: 5px !important;
+    }
+
+    .depth-indicator::after, 
+    .materials-indicator::after, 
+    .enclosure-indicator::after, 
+    .door-indicator::after {
+        width: calc(100% + 10px) !important;
+        height: 48px !important;
+        top: -6px !important;
+        left: -5px !important;
+        background-size: 100% 100% !important;
+    }
+
+    .func-col-indicator::after {
+        width: 48px !important;
+        height: 48px !important;
+        top: -5px !important;
+        left: -5px !important;
+        background-size: 100% 100% !important;
+    }
+
+    .interior-indicator::after {
+        content: '';
+        position: absolute;
+        width: calc(100% + 10px) !important;
+        height: 80px !important;
+        top: -6px !important;
+        left: -5px !important;
+        background: url('assets/frame w84 h112.png') no-repeat center !important;
+        background-size: 100% 100% !important;
+        pointer-events: none;
+        display: block !important;
+    }
+
+    /* Footer Actions container padding */
+    .config-content-wrapper > .flex.gap-4 {
+        padding: 32px 0 0 !important;
+        width: 100% !important;
+    }
+
+    /* Sticky Viewer for Mobile */
+    .main-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+    }
+
+    #viewer-card {
+        position: sticky !important;
+        top: 96px !important;
+        z-index: 50 !important;
+        width: 100% !important;
+        height: 500px !important;
+        margin-bottom: -500px !important; /* Pull sidebar up */
+        background-color: #F5F5F5 !important;
+    }
+
+    #config-sidebar {
+        position: relative !important;
+        overflow: visible !important;
+        padding-top: 524px !important; /* Space for viewer + gap */
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+    }
 
 
 

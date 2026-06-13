@@ -40,12 +40,15 @@
         .back-link:hover {
             opacity: 1;
         }
+.vacancy-content, .apply-form {
+    padding: 0 14px;
+}
 
         .vacancy-content {
             grid-column: span 7;
             max-width: 504px;
+            color: #000;
         }
-
         .vacancy-sidebar {
             grid-column: span 5;
             position: sticky;
@@ -150,7 +153,7 @@
         }
 
         .apply-form input {
-            width: 410px; 
+            width: 100%; 
             padding: 0 15px;
             height: 48px;
             border: 1px solid #ccc; 
@@ -161,16 +164,19 @@
             color: var(--color-dark);
         }
         .apply-form textarea {
-            width: 100%; 
-            padding: 15px; 
-            border: 1px solid #ccc; 
+            width: 100%;
+            height: 140px;
+            padding: 15px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            font-family: var(--font-main); 
-            font-size: 14px; 
-            background-color: var(--color-white); 
+            font-family: var(--font-main);
+            font-size: 14px;
+            background-color: var(--color-white);
             color: var(--color-dark);
             resize: none;
         }
+        .input-wrapper-textarea { position: relative; }
+        .textarea-star { position: absolute; top: 10px; right: 10px; color: var(--color-accent); }
 
         .apply-btn {
             width: 192px;
@@ -195,9 +201,14 @@
 
         @media (max-width: 768px) {
             body { padding-top: 120px !important; }
-            .vacancy-detail-container { padding: 0 24px 60px; padding-top: 0 !important; }
+            .vacancy-detail-container { padding: 0 0 60px; padding-top: 0 !important; }
             .detail-title { font-size: 36px; }
-            .apply-form input { width: 100%; }
+            .detail-meta { flex-wrap: wrap; max-width: 272px; }
+            .vacancy-content { padding: 0 24px; width: 100%; }
+            .vacancy-sidebar { padding: 0 24px; width: 100%; box-sizing: border-box; }
+            .apply-form input, .apply-form textarea { width: 100%; }
+            .apply-card { padding: 24px; }
+            .back-link { padding: 0 24px; }
         }
     </style>
 </head>
@@ -287,7 +298,10 @@
                         <span class="input-star">*</span>
                         <input type="tel" placeholder="Phone Number">
                     </div>
-                    <textarea placeholder="Tell us about your experience" rows="4"></textarea>
+                    <div class="input-wrapper">
+                        <span class="input-star">*</span>
+                        <textarea placeholder="Tell us about your experience" rows="4" required></textarea>
+                    </div>
                     <button type="submit" class="btn btn-primary apply-btn">Send Application</button>
                 </form>
             </div>

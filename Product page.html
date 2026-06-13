@@ -100,6 +100,45 @@
             height: 140px !important;
         }
 
+        .apply-card {
+            background-color: #331D0F;
+            color: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+        }
+        .apply-card h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+        .apply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        .input-wrapper { position: relative; margin-bottom: 5px; width: 100%; }
+        .input-star {
+            position: absolute; top: 12px; right: 10px; font-size: 14px; color: #DD5C00;
+        }
+        .apply-form input, .apply-form textarea {
+            width: 100%; 
+            padding: 0 15px;
+            height: 48px;
+            border: 1px solid #ccc; 
+            border-radius: 4px;
+            font-family: inherit; 
+            font-size: 14px; 
+            background-color: #fff;
+            color: #331D0F;
+            box-sizing: border-box;
+        }
+        .apply-form textarea {
+            height: auto;
+            padding-top: 15px;
+        }
+
         /* Layout Structure */
         .page-container {
             width: 100%;
@@ -158,6 +197,11 @@
             /* Contact Section Mobile */
             .contact-container {
                 grid-template-columns: 1fr !important;
+            }
+
+            .product-title {
+                font-size: 32px !important;
+                line-height: 1.15 !important;
             }
         }
 
@@ -819,7 +863,7 @@
                             Order
                         </button>
                         <button id="wishlist-trigger" class="btn btn-secondary btn-on-white flex items-center justify-center gap-2" style="background-image: none; border: 1px solid var(--color-dark);">
-                            Add to Wishlist
+                            Wishlist
                             <i class="ph ph-heart"></i>
                         </button>
                     </div>
@@ -1036,7 +1080,7 @@
                             <h3 class="product-name">Hanging light dresser</h3>
                             <span class="product-dims">W 180 D 45 H 210 cm</span>
                         </div>
-                    </article>
+                    <div class="card-corner"></div></article>
                 </a>
                 <a href="coming-soon.html" class="product-card-link">
                     <article class="product-card card-small">
@@ -1048,7 +1092,7 @@
                             <h3 class="product-name">Table inscribed in the wall</h3>
                             <span class="product-dims">W 150 D 40 H 180 cm</span>
                         </div>
-                    </article>
+                    <div class="card-corner"></div></article>
                 </a>
                 <a href="dresser-configurator.html" class="product-card-link">
                     <article class="product-card card-small">
@@ -1060,7 +1104,7 @@
                             <h3 class="product-name">Low sideboard for the TV</h3>
                             <span class="product-dims">W 50 D 50 H 60 cm</span>
                         </div>
-                    </article>
+                    <div class="card-corner"></div></article>
                 </a>
                 <a href="pet-houses-configurator.html" class="product-card-link">
                     <article class="product-card card-small">
@@ -1072,7 +1116,7 @@
                             <h3 class="product-name">Pet house with a roof</h3>
                             <span class="product-dims">W 80 D 60 H 70 cm</span>
                         </div>
-                    </article>
+                    <div class="card-corner"></div></article>
                 </a>
             </div>
         </div>
@@ -1169,12 +1213,17 @@
                     <h3 style="margin-bottom: 24px;">Leave your review!</h3>
                     <form class="apply-form">
                         <div class="input-wrapper">
+                            <span class="input-star">*</span>
                             <input type="text" placeholder="Full Name" required>
                         </div>
                         <div class="input-wrapper">
+                            <span class="input-star">*</span>
                             <input type="email" placeholder="Email Address" required>
                         </div>
-                        <textarea placeholder="Your review" rows="4"></textarea>
+                        <div class="input-wrapper">
+                            <span class="input-star">*</span>
+                            <textarea placeholder="Your review" rows="4" required></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary apply-btn">Submit Review</button>
                     </form>
                 </div>

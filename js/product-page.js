@@ -32,12 +32,26 @@ const config = {
 };
 
 const materialColors = {
-    graphite: '#333333',
+    graphite: '#1A1A1A',
     white: '#FFFFFF',
-    navy: '#1B263B',
+    black: '#000000',
+    beige_light: '#E1C699',
+    beige_medium: '#D2B48C',
+    beige_dark: '#C5A075',
+    darkbrown: '#4E342E',
+    brown: '#5D4037',
+    deepbrown: '#3E2723',
+    darkgrey: '#424242',
+    grey: '#616161',
+    mediumgrey: '#757575',
+    slate: '#263238',
+    charcoal: '#37474F',
+    matteblack: '#212121',
     oak: '#C19A6B',
     walnut: '#67413E',
-    pine: '#D7B484'
+    pine: '#D7B484',
+    mahogany: '#8B4513',
+    sienna_wood: '#A0522D'
 };
 
 function init() {
@@ -51,7 +65,7 @@ function init() {
         const height = parent.clientHeight;
 
         scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xfff1e2); 
+        scene.background = new THREE.Color(0xF5F5F5); 
 
         camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
         camera.position.set(4, 2.5, 6);
@@ -744,10 +758,14 @@ function updateLabels(totalW) {
     dimensionLabels = [];
     if (config.showDimensions) {
         let currentX = -totalW / 2;
-        createLabel(wardrobeGroup, `${Math.round(totalW*100)}cm`, new THREE.Vector3(0, 3.2, 0.6), 'label-width');
+        // Total width
+        createLabel(wardrobeGroup, `W: ${Math.round(totalW*100)}cm`, new THREE.Vector3(0, 3.2, 0.6), 'label-width');
+        
         config.columnsData.forEach(col => {
             const x = currentX + col.width/2 + config.boardThickness;
-            createLabel(wardrobeGroup, `${Math.round(col.width*100)}cm`, new THREE.Vector3(x, col.height + 0.15, col.depth), 'label-col-width');
+            // Column Width and Total Height
+            createLabel(wardrobeGroup, `W: ${Math.round(col.width*100)}cm | H: ${Math.round(col.height*100)}cm`, new THREE.Vector3(x, col.height + 0.3, col.depth), 'label-col-info');
+            
             const plinthH = 0.03, bt = config.boardThickness, pos = [];
             if (col.layout === 'stack') {
                 const sp = 0.4, num = Math.floor((col.height - plinthH - 0.4) / sp);
@@ -760,7 +778,7 @@ function updateLabels(totalW) {
             }
             for (let i = 1; i < pos.length; i++) {
                 const midY = (pos[i] + pos[i-1]) / 2, h = Math.round((pos[i] - pos[i-1]) * 100);
-                createLabel(wardrobeGroup, `${h}cm`, new THREE.Vector3(x, midY, col.depth + 0.05), 'label-shelf-height small-label');
+                createLabel(wardrobeGroup, `H: ${h}cm`, new THREE.Vector3(x, midY, col.depth + 0.1), 'label-shelf-height small-label');
             }
             currentX += col.width + config.boardThickness;
         });

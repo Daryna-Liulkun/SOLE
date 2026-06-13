@@ -410,7 +410,7 @@ document.addEventListener('DOMContentLoaded', () => {
             heroSlides[currentIndex].classList.remove('active');
             heroSlides[nextIndex].classList.add('active');
             currentIndex = nextIndex;
-        }, 2000);
+        }, 1000);
     }
 
     // Hero title typography expansion (uppercase -> wide lowercase morph)
@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroTitle) {
         setTimeout(() => {
             heroTitle.classList.add('expanded');
-        }, 500); // Trigger transition 500ms after load
+        }, 250); // Trigger transition 250ms after load
     }
 
     // Ensure catalogue images are lazy-loaded for performance
