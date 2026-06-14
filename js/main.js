@@ -393,7 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hero frame automatic random animation
     const heroSlides = document.querySelectorAll('.hero-animated-slide');
     if (heroSlides.length > 0) {
-        let currentIndex = 0;
+        // Find the index of the initially active slide
+        let currentIndex = Array.from(heroSlides).findIndex(slide => slide.classList.contains('active'));
+        if (currentIndex === -1) currentIndex = 0;
         
         function getNextRandomIndex(currentIdx, totalCount) {
             if (totalCount <= 1) return 0;
@@ -404,21 +406,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return nextIdx;
         }
 
-        // Original hero rotation speed
+        // Faster hero rotation speed
         setInterval(() => {
             const nextIndex = getNextRandomIndex(currentIndex, heroSlides.length);
-            heroSlides[currentIndex].classList.remove('active');
+            // Ensure we remove active from ALL slides just in case
+            heroSlides.forEach(slide => slide.classList.remove('active'));
             heroSlides[nextIndex].classList.add('active');
             currentIndex = nextIndex;
         }, 1000);
-    }
-
-    // Hero title typography expansion (uppercase -> wide lowercase morph)
-    const heroTitle = document.querySelector('.hero-title.animate-title');
-    if (heroTitle) {
-        setTimeout(() => {
-            heroTitle.classList.add('expanded');
-        }, 250); // Trigger transition 250ms after load
     }
 
     // Ensure catalogue images are lazy-loaded for performance

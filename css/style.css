@@ -382,58 +382,6 @@ a { text-decoration: none; color: inherit; font-size: var(--fs-body); }
     text-transform: none;
 }
 
-/* Morphing letters animation for Hero title */
-.morph-letter[data-char="o"] { --narrow-w: 0.65em; --wide-w: 1.25em; }
-.morph-letter[data-char="l"] { --narrow-w: 0.40em; --wide-w: 1.00em; }
-.morph-letter[data-char="d"] { --narrow-w: 0.65em; --wide-w: 1.25em; }
-.morph-letter[data-char="u"] { --narrow-w: 0.65em; --wide-w: 1.25em; }
-.morph-letter[data-char="c"] { --narrow-w: 0.65em; --wide-w: 1.25em; }
-.morph-letter[data-char="e"] { --narrow-w: 0.60em; --wide-w: 1.15em; }
-
-.morph-letter {
-    display: inline-block;
-    position: relative;
-    width: var(--narrow-w, 0.65em);
-    height: 1.1em;
-    vertical-align: middle;
-    overflow: visible;
-    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.morph-letter .narrow-char {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 1;
-    transform: scaleX(1);
-    transform-origin: left;
-    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.morph-letter .wide-char {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    transform: scaleX(0.6);
-    transform-origin: left;
-    transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Expanded state trigger (mixed uppercase & wide lowercase) */
-.animate-title.expanded .morph-letter {
-    width: var(--wide-w, 1.05em);
-}
-
-.animate-title.expanded .morph-letter .narrow-char {
-    opacity: 0;
-    transform: scaleX(1.5);
-}
-
-.animate-title.expanded .morph-letter .wide-char {
-    opacity: 1;
-    transform: scaleX(1);
-}
 .hero-subtitle { 
     margin-bottom: 40px; 
     font-size: 18px; 
