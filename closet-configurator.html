@@ -714,14 +714,28 @@
 
         .interior-indicator {
             position: absolute;
-            width: 82px;
-            height: 112px;
-            background: url('assets/frame w84 h112.png') no-repeat center;
-            background-size: 100% 100%;
+            width: 74px;
+            height: 102px;
+            background: #FFFFFF;
+            border-radius: 5px;
             z-index: 1;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            left: 1px;
+            left: 5px;
+            top: 5px;
             pointer-events: none;
+        }
+
+        .interior-indicator::after {
+            content: '';
+            position: absolute;
+            width: 82px;
+            height: 112px;
+            top: -5px;
+            left: -4px;
+            background: url('assets/frame w84 h112.png') no-repeat center;
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .interior-btn {
@@ -736,7 +750,13 @@
             cursor: pointer;
             z-index: 2;
             padding: 0;
-            background-color: #FFFFFF; /* Buttons are white */
+            background-color: transparent; /* Inactive buttons are transparent */
+            filter: invert(1); /* Inactive icons are inverted */
+        }
+
+        .interior-btn.active {
+            background-color: transparent; /* Active button background is now the sliding indicator */
+            filter: none; /* Active icon is not inverted */
         }
 
         .interior-label {
@@ -794,12 +814,12 @@
 
             #viewer-card {
                 width: 100% !important;
-                height: 400px !important;
-                min-height: 400px !important;
+                height: 520px !important;
+                min-height: 520px !important;
                 position: sticky !important;
-                top: 96px !important;
+                top: 0px !important;
                 z-index: 50 !important;
-                margin-bottom: -400px !important; /* Pull sidebar up */
+                margin-bottom: -520px !important; /* Pull sidebar up */
                 background-color: #F5F5F5 !important;
             }
 
@@ -807,7 +827,7 @@
                 width: 100% !important;
                 position: relative !important;
                 overflow: visible !important;
-                padding-top: 400px !important; /* Space for viewer + gap */
+                padding-top: 520px !important; /* Space for viewer + gap */
                 background: transparent !important;
                 box-shadow: none !important;
                 margin-bottom: -500px !important; /* Shorten scroll field even more */
@@ -850,6 +870,58 @@
             .vacancy-sidebar {
                 width: 100% !important;
                 position: static !important;
+            }
+
+            /* Configuration interior mobile overrides */
+            .interior-setup-container {
+                display: flex !important;
+                height: 80px !important; 
+                padding: 6px !important;
+                gap: 6px !important;
+                justify-content: flex-start !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            .interior-btn {
+                flex: 1 !important;
+                height: 68px !important; 
+                width: auto !important;
+                margin: 0 !important;
+                background-size: contain !important;
+                background-color: transparent !important;
+                filter: invert(1) !important;
+                z-index: 2 !important;
+            }
+
+            .interior-btn.active {
+                filter: none !important;
+            }
+
+            .interior-indicator { 
+                display: flex !important;
+                z-index: 1 !important;
+                left: 5px !important;
+                width: calc(20% - 5.2px) !important; 
+                height: 74px !important;
+                background: #FFFFFF !important;
+                border-radius: 5px !important;
+                top: 3px !important;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+
+            .interior-indicator::after {
+                content: '';
+                position: absolute;
+                width: calc(100% + 8px) !important;
+                height: 80px !important;
+                top: -3px !important;
+                left: -4px !important;
+                background: url('assets/frame w84 h112.png') no-repeat center !important;
+                background-size: 100% 100% !important;
+                pointer-events: none;
+                display: block !important;
+                transition: none !important;
             }
         }
 
@@ -1441,11 +1513,67 @@
     <script src="js/main.js"></script>
 
     <!-- Order Modal -->
-    <div id="order-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-white p-8 rounded-lg">
-            <h2 class="text-xl font-bold mb-4">Send request order</h2>
-            <button onclick="document.getElementById('order-modal').classList.add('hidden')">Close</button>
+    <div id="order-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-2xl" style="background-color: rgba(255, 255, 255, 0.15) !important; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);">
+        <div class="bg-dark w-full max-w-lg rounded-[10px] p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto" style="border-radius: 10px; background-color: var(--color-dark); box-shadow: 0 0 40px rgba(221, 92, 0, 0.65);">
+            <!-- Success Overlay -->
+            <div id="orderOverlay" class="contact-overlay" style="display: none; border-radius: 10px;">
+                <div class="contact-overlay-content p-6 flex flex-col items-center justify-center">
+                    <h3 class="text-2xl sm:text-3xl font-medium leading-tight mb-6">Thank you for your order!<br>We will contact you soon.</h3>
+                    <button onclick="document.getElementById('orderOverlay').classList.remove('active'); document.getElementById('orderOverlay').style.display = 'none'; document.getElementById('order-modal').classList.add('hidden')" class="btn btn-primary btn-on-dark" style="margin-top: 20px;">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl sm:text-2xl font-medium text-white">Send request order</h2>
+                <button onclick="document.getElementById('order-modal').classList.add('hidden')" class="text-white/60 hover:text-white transition-colors">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Form -->
+            <form class="contact-form" id="orderForm">
+                <div class="form-row">
+                    <div class="field field--required">
+                        <input type="text" id="orderName" placeholder="Name" required>
+                    </div>
+                    <div class="field field--required">
+                        <input type="email" id="orderEmail" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="field field--required">
+                    <input type="tel" id="orderPhone" placeholder="Phone" required>
+                </div>
+                <div class="field field--required">
+                    <input type="text" id="orderAddress" placeholder="Delivery address" required>
+                </div>
+                <div class="textarea-wrapper">
+                    <textarea id="orderComment" placeholder="Order details or comments" rows="4" maxlength="400"></textarea>
+                    <div class="textarea-counter" data-for="orderForm">0/400</div>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary">Send the form</button>
+                </div>
+            </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderForm = document.getElementById('orderForm');
+            const orderOverlay = document.getElementById('orderOverlay');
+            if (orderForm && orderOverlay) {
+                orderForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    orderOverlay.style.display = 'flex';
+                    setTimeout(() => {
+                        orderOverlay.classList.add('active');
+                    }, 10);
+                    orderForm.reset();
+                });
+            }
+        });
+    </script>
 </body>
 </html>

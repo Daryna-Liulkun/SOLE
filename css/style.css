@@ -792,7 +792,11 @@ select { appearance: none; }
 
 /* Services Modal Overlay */
 .services-modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 150;
+    position: fixed; inset: 0; 
+    background: rgba(255, 255, 255, 0.15) !important; 
+    backdrop-filter: blur(24px) !important; 
+    -webkit-backdrop-filter: blur(24px) !important; 
+    z-index: 150;
     opacity: 0; transition: opacity 0.3s;
 }
 .services-modal-backdrop.active { opacity: 1; }
@@ -1737,6 +1741,7 @@ select { appearance: none; }
         text-align: left;
         border-radius: 4px;
         transition: all 0.3s ease;
+        flex-shrink: 0;
     }
     
     /* Active state for burger menu buttons matching desktop but bigger */
@@ -1792,8 +1797,19 @@ select { appearance: none; }
     }
     .nav .wishlist-btn.nav-active::after { content: 'Wishlist'; }
 
-    .nav-item-dropdown { align-items: flex-start; width: 100%; height: auto; min-height: 50px; }
-    .nav-item-dropdown.active { height: auto; flex-direction: column; }
+    .nav-item-dropdown { 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
+        width: 100%; 
+        height: auto; 
+        min-height: 50px; 
+        flex-shrink: 0;
+    }
+    .nav-item-dropdown.active { 
+        height: auto; 
+        flex-direction: column; 
+    }
     
     /* Smooth dropdown animation style like specification accordions */
     .dropdown-menu { 
@@ -1814,6 +1830,7 @@ select { appearance: none; }
         transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0.3s ease, margin-top 0.5s ease, padding 0.5s ease;
     }
     .nav-item-dropdown.active .dropdown-menu { 
+        max-height: 350px !important;
         opacity: 1; 
         visibility: visible; 
         padding: 0 0 0 20px; 
@@ -1830,8 +1847,17 @@ select { appearance: none; }
     .nav-item-dropdown.active .dropdown-toggle i { 
         transform: rotate(0deg); 
     }
-    .dropdown-menu a { text-align: left; padding: 8px 0 !important; font-size: 20px; background-color: transparent !important; color: var(--color-white) !important; display: flex !important; justify-content: flex-start !important; }
-    .dropdown-menu a.nav-active { background-color: transparent !important; color: var(--color-accent) !important; padding: 8px 0 !important; font-weight: 400 !important; display: flex !important; justify-content: flex-start !important; }
+    .dropdown-menu a { text-align: left; padding: 8px 0 !important; font-size: 20px; background-color: transparent !important; color: var(--color-white) !important; display: flex !important; justify-content: flex-start !important; height: auto !important; }
+    .dropdown-menu a.nav-active { 
+        background-color: transparent !important; 
+        color: var(--color-accent) !important; 
+        padding: 8px 0 !important; 
+        font-weight: 400 !important; 
+        display: flex !important; 
+        justify-content: flex-start !important; 
+        width: auto !important;
+        height: auto !important;
+    }
     .dropdown-menu a.nav-active::before { display: none !important; }
 
     .grid-12 { grid-template-columns: 1fr; }
@@ -2257,6 +2283,11 @@ select { appearance: none; }
         width: auto !important;
         margin: 0 !important;
         background-size: contain !important;
+        background-color: transparent !important;
+        filter: invert(1) !important;
+    }
+    .interior-btn.active {
+        filter: none !important;
     }
 
     /* Revert functionality column picking filter to original look */
@@ -2293,10 +2324,13 @@ select { appearance: none; }
         height: 38px !important; 
     }
     .interior-indicator { 
-        width: calc(20% - 7.2px) !important; 
-        height: 68px !important;
+        width: calc(20% - 5.2px) !important; 
+        height: 74px !important;
         background: #FFFFFF !important;
         border-radius: 5px !important;
+        top: 3px !important;
+        left: 5px !important;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     .depth-indicator::after, 
@@ -2321,14 +2355,15 @@ select { appearance: none; }
     .interior-indicator::after {
         content: '';
         position: absolute;
-        width: calc(100% + 10px) !important;
+        width: calc(100% + 8px) !important;
         height: 80px !important;
-        top: -6px !important;
-        left: -5px !important;
-        background: url('assets/frame w84 h112.png') no-repeat center !important;
+        top: -3px !important;
+        left: -4px !important;
+        background: url('../assets/frame w84 h112.png') no-repeat center !important;
         background-size: 100% 100% !important;
         pointer-events: none;
         display: block !important;
+        transition: none !important;
     }
 
     /* Footer Actions container padding */
@@ -2346,7 +2381,7 @@ select { appearance: none; }
 
     #viewer-card {
         position: sticky !important;
-        top: 96px !important;
+        top: 0px !important;
         z-index: 50 !important;
         width: 100% !important;
         height: 500px !important;
@@ -2361,7 +2396,23 @@ select { appearance: none; }
         background: transparent !important;
         box-shadow: none !important;
     }
+
+    /* Stack form fields vertically on mobile/tablets <= 768px */
+    .contact-form .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
     }
+
+    /* Set padding of order-modal backdrop wrapper to 24px from each side */
+    #order-modal {
+        padding: 24px !important;
+    }
+
+    /* Set margin-top of order-modal form content card to 36px on mobile */
+    #order-modal > div {
+        margin-top: 36px !important;
+    }
+}
 
 
 

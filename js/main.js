@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero frame automatic random animation
     const heroSlides = document.querySelectorAll('.hero-animated-slide');
-    if (heroSlides.length > 0) {
+    if (heroSlides.length > 1) {
         // Find the index of the initially active slide
         let currentIndex = Array.from(heroSlides).findIndex(slide => slide.classList.contains('active'));
         if (currentIndex === -1) currentIndex = 0;

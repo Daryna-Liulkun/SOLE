@@ -200,11 +200,18 @@
 
         @media (max-width: 768px) {
             body { padding-top: 120px !important; }
-            .vacancy-detail-container { padding: 0 0 60px; padding-top: 0 !important; }
+            .vacancy-detail-container { 
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+                padding: 0 0 60px; 
+                padding-top: 0 !important; 
+            }
             .detail-title { font-size: 36px; }
             .detail-meta { flex-wrap: wrap; max-width: 272px; }
             .vacancy-content { padding: 0 24px; width: 100%; }
             .vacancy-sidebar { padding: 0 24px; width: 100%; box-sizing: border-box; }
+            .input-wrapper { width: 100%; }
             .apply-form input, .apply-form textarea { width: 100%; }
             .apply-card { padding: 24px; }
             .back-link { padding: 0 24px; }

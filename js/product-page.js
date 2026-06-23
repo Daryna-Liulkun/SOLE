@@ -298,7 +298,7 @@ function renderFunctionPanel() {
         const activeBtn = root.querySelector('.interior-btn.active');
         const indicator = document.getElementById('interiorIndicator');
         if (activeBtn && indicator) {
-            const x = activeBtn.offsetLeft - 1 - 4;
+            const x = activeBtn.offsetLeft - 5;
             indicator.style.transform = `translateX(${x}px)`;
         }
     };
