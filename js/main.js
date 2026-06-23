@@ -420,4 +420,81 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.catalogue-container img').forEach(img => {
         if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
     });
+
+    // Morphing Title Characters Animation
+    const morphChars = document.querySelectorAll('.morph-char');
+    if (morphChars.length > 0) {
+        let hasAnimated = false;
+        let animationInterval = null;
+
+        function startAnimationLoop() {
+            if (animationInterval) clearInterval(animationInterval);
+            animationInterval = setInterval(() => {
+                hasAnimated = !hasAnimated;
+                morphChars.forEach(char => {
+                    char.classList.toggle('animate', hasAnimated);
+                });
+            }, 2300);
+        }
+
+        function initializeMorphChars(isResize = false) {
+            // Temporarily reset state to measure natural static widths
+            morphChars.forEach(char => {
+                char.classList.remove('animate');
+                char.style.removeProperty('--w-upper-raw');
+                char.style.removeProperty('--w-lower-raw');
+            });
+            
+            // Force a DOM layout recalculation to ensure accurate measurements
+            document.body.offsetHeight;
+            
+            // Measure actual layout dimensions for uppercase and lowercase variants
+            morphChars.forEach(char => {
+                const upper = char.querySelector('.char-upper');
+                const lower = char.querySelector('.char-lower');
+                if (upper && lower) {
+                    const wUpper = upper.getBoundingClientRect().width;
+                    const wLower = lower.getBoundingClientRect().width;
+                    char.style.setProperty('--w-upper-raw', wUpper);
+                    char.style.setProperty('--w-lower-raw', wLower);
+                }
+            });
+            
+            if (!isResize) {
+                hasAnimated = false;
+                startAnimationLoop();
+            } else {
+                morphChars.forEach(char => {
+                    char.classList.toggle('animate', hasAnimated);
+                });
+                startAnimationLoop();
+            }
+        }
+
+        // Run measurements after custom fonts are loaded to ensure correct widths
+        if (document.fonts) {
+            // Force load Glendale font specifically to avoid fallback font measurements
+            document.fonts.load("1em Glendale").then(() => {
+                setTimeout(() => initializeMorphChars(false), 100);
+            }).catch(() => {
+                // Fallback to ready promise if loading fails
+                document.fonts.ready.then(() => {
+                    setTimeout(() => initializeMorphChars(false), 100);
+                });
+            });
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(() => initializeMorphChars(false), 100);
+            });
+        }
+
+        // Handle page resize with a debounce
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                initializeMorphChars(true);
+            }, 150);
+        });
+    }
 });

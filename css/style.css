@@ -1638,6 +1638,56 @@ select { appearance: none; }
 /* Navigation Active State */
 .nav-active { color: var(--color-accent); font-weight: 600; }
 
+/* Morphing Title Characters Animation */
+.morph-char {
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: start;
+    align-items: baseline;
+    vertical-align: baseline;
+    position: relative;
+    white-space: nowrap;
+}
+
+/* Apply width constraints only after measurements have loaded to prevent layout jumping */
+.morph-char[style*="--w-upper-raw"] {
+    width: calc(var(--w-upper-raw) * 1px);
+    transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.morph-char.animate[style*="--w-lower-raw"] {
+    width: calc(var(--w-lower-raw) * 1px);
+}
+
+.morph-char .char-upper {
+    grid-area: 1 / 1 / 2 / 2;
+    display: inline-block;
+    white-space: nowrap;
+    transform-origin: bottom left;
+    opacity: 1;
+    transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.morph-char.animate .char-upper {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.morph-char .char-lower {
+    grid-area: 1 / 1 / 2 / 2;
+    display: inline-block;
+    white-space: nowrap;
+    transform-origin: bottom left;
+    opacity: 0;
+    transition: opacity 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.morph-char.animate .char-lower {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 /* Responsive (Complete) */
 @media (max-width: 1024px) {
     .container { padding: 0 40px; }
@@ -2413,6 +2463,3 @@ select { appearance: none; }
         margin-top: 36px !important;
     }
 }
-
-
-
